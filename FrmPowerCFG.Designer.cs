@@ -64,6 +64,7 @@
             // contextMenuStrip
             // 
             resources.ApplyResources(this.contextMenuStrip, "contextMenuStrip");
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ExpandToolStripMenuItem,
             this.CollapseToolStripMenuItem,

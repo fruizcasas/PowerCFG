@@ -59,48 +59,121 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ExpandToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>183, 32</value>
   </data>
   <data name="ExpandToolStripMenuItem.Text" xml:space="preserve">
     <value>Expandir</value>
   </data>
   <data name="CollapseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>183, 32</value>
   </data>
   <data name="CollapseToolStripMenuItem.Text" xml:space="preserve">
     <value>Contraer</value>
   </data>
   <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>180, 6</value>
   </data>
   <data name="HiddenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>183, 32</value>
   </data>
   <data name="HiddenToolStripMenuItem.Text" xml:space="preserve">
     <value>Oculto</value>
   </data>
   <data name="ShowToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>183, 32</value>
   </data>
   <data name="ShowToolStripMenuItem.Text" xml:space="preserve">
     <value>Mostrar</value>
   </data>
   <data name="ActivateSchemaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>183, 32</value>
   </data>
   <data name="ActivateSchemaToolStripMenuItem.Text" xml:space="preserve">
     <value>Activar Plan</value>
   </data>
   <data name="CopyGUIDToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>183, 32</value>
   </data>
   <data name="CopyGUIDToolStripMenuItem.Text" xml:space="preserve">
     <value>Copiar GUID</value>
   </data>
   <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 164</value>
+    <value>184, 202</value>
+  </data>
+  <data name="tv.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 62</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tv.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="tv.Size" type="System.Drawing.Size, System.Drawing">
+    <value>957, 662</value>
+  </data>
+  <data name="UnhiddenCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 18</value>
+  </data>
+  <data name="UnhiddenCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="UnhiddenCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 29</value>
+  </data>
+  <data name="PictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>990, 62</value>
+  </data>
+  <data name="PictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="PictureBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 107</value>
+  </data>
+  <data name="RangeEditor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>153, 10</value>
+  </data>
+  <data name="RangeEditor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 8, 6, 8</value>
+  </data>
+  <data name="RangeEditor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>417, 38</value>
+  </data>
+  <data name="DropDownEditor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>153, 38</value>
+  </data>
+  <data name="DropDownEditor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 8, 6, 8</value>
+  </data>
+  <data name="DropDownEditor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>417, 38</value>
+  </data>
+  <data name="ShowGuidsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>998, 698</value>
+  </data>
+  <data name="ShowGuidsCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ShowGuidsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 29</value>
+  </data>
+  <data name="ExcelExportButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>990, 13</value>
+  </data>
+  <data name="ExcelExportButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ExcelExportButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 38</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>10, 25</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1099, 750</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Configurado de Planes de Energia</value>
+    <value>Configurador de Planes de Energia</value>
   </data>
 </root>

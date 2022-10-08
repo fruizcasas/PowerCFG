@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DropDownEditor));
             this.NameLabel = new System.Windows.Forms.Label();
             this.ValueComboBox = new System.Windows.Forms.ComboBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -37,47 +38,34 @@
             // 
             // NameLabel
             // 
-            this.NameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.NameLabel.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.NameLabel, "NameLabel");
             this.NameLabel.Name = "NameLabel";
-            this.NameLabel.Size = new System.Drawing.Size(118, 23);
-            this.NameLabel.TabIndex = 1;
-            this.NameLabel.Text = "label1";
-            this.NameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ValueComboBox
             // 
-            this.ValueComboBox.Dock = System.Windows.Forms.DockStyle.Right;
+            resources.ApplyResources(this.ValueComboBox, "ValueComboBox");
             this.ValueComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ValueComboBox.FormattingEnabled = true;
-            this.ValueComboBox.Location = new System.Drawing.Point(118, 0);
             this.ValueComboBox.Name = "ValueComboBox";
-            this.ValueComboBox.Size = new System.Drawing.Size(180, 23);
-            this.ValueComboBox.TabIndex = 2;
             this.ValueComboBox.SelectedIndexChanged += new System.EventHandler(this.ValueComboBox_SelectedIndexChanged);
             this.ValueComboBox.Leave += new System.EventHandler(this.ValueComboBox_Leave);
             // 
             // RestoreDefaultButton
             // 
-            this.RestoreDefaultButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.RestoreDefaultButton.Location = new System.Drawing.Point(298, 0);
+            resources.ApplyResources(this.RestoreDefaultButton, "RestoreDefaultButton");
             this.RestoreDefaultButton.Name = "RestoreDefaultButton";
-            this.RestoreDefaultButton.Size = new System.Drawing.Size(40, 23);
-            this.RestoreDefaultButton.TabIndex = 3;
-            this.RestoreDefaultButton.Text = "Def.";
             this.RestoreDefaultButton.UseVisualStyleBackColor = true;
             this.RestoreDefaultButton.Click += new System.EventHandler(this.RestoreDefaultButton_Click);
             // 
             // DropDownEditor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.Controls.Add(this.NameLabel);
             this.Controls.Add(this.ValueComboBox);
             this.Controls.Add(this.RestoreDefaultButton);
             this.Name = "DropDownEditor";
-            this.Size = new System.Drawing.Size(338, 23);
             this.ResumeLayout(false);
 
         }

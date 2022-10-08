@@ -57,316 +57,320 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;DropDownEditor.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="ShowGuidsCheckBox.Text" xml:space="preserve">
-    <value>Guids</value>
-  </data>
-  <data name="&gt;&gt;ShowGuidsCheckBox.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;tv.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;UnhiddenCheckBox.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;CopyGUIDToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="UnhiddenCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 19</value>
+  <data name="ShowGuidsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 19</value>
   </data>
-  <data name="&gt;&gt;ShowToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="DropDownEditor.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="CollapseToolStripMenuItem.Text" xml:space="preserve">
-    <value>Collapse</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStrip.Name" xml:space="preserve">
-    <value>contextMenuStrip</value>
-  </data>
-  <data name="HiddenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
-  </data>
-  <data name="&gt;&gt;tv.Name" xml:space="preserve">
-    <value>tv</value>
-  </data>
-  <data name="&gt;&gt;PictureBox.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="tv.Size" type="System.Drawing.Size, System.Drawing">
-    <value>671, 399</value>
-  </data>
-  <data name="&gt;&gt;PictureBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="CollapseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FrmPowerCFG</value>
-  </data>
-  <data name="UnhiddenCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="ShowGuidsCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="tv.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="ExcelExportButton.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;UnhiddenCheckBox.Name" xml:space="preserve">
-    <value>UnhiddenCheckBox</value>
-  </data>
-  <data name="&gt;&gt;DropDownEditor.Type" xml:space="preserve">
-    <value>PowerCFG.Components.DropDownEditor, PowerCFG, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="RangeEditor.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;RangeEditor.Name" xml:space="preserve">
-    <value>RangeEditor</value>
-  </data>
-  <data name="&gt;&gt;ExcelExportButton.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ActivateSchemaToolStripMenuItem.Text" xml:space="preserve">
-    <value>Activate Schema</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Power CFG</value>
-  </data>
-  <data name="RangeEditor.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;ActivateSchemaToolStripMenuItem.Name" xml:space="preserve">
-    <value>ActivateSchemaToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;ExcelExportButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DropDownEditor.Name" xml:space="preserve">
-    <value>DropDownEditor</value>
-  </data>
-  <data name="&gt;&gt;CollapseToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PictureBox.Name" xml:space="preserve">
-    <value>PictureBox</value>
-  </data>
-  <data name="&gt;&gt;UnhiddenCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="RangeEditor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 6</value>
-  </data>
-  <data name="&gt;&gt;ShowToolStripMenuItem.Name" xml:space="preserve">
-    <value>ShowToolStripMenuItem</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>7, 15</value>
-  </data>
-  <data name="DropDownEditor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 23</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>769, 450</value>
-  </data>
-  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 6</value>
-  </data>
-  <data name="RangeEditor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 23</value>
-  </data>
-  <data name="&gt;&gt;RangeEditor.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ShowGuidsCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="ExcelExportButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 23</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="CopyGUIDToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
-  </data>
-  <data name="&gt;&gt;RangeEditor.Type" xml:space="preserve">
-    <value>PowerCFG.Components.RangeEditor, PowerCFG, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="PictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>CenterImage</value>
-  </data>
-  <data name="&gt;&gt;ExcelExportButton.Name" xml:space="preserve">
-    <value>ExcelExportButton</value>
-  </data>
-  <data name="&gt;&gt;CopyGUIDToolStripMenuItem.Name" xml:space="preserve">
-    <value>CopyGUIDToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;ExpandToolStripMenuItem.Name" xml:space="preserve">
-    <value>ExpandToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;ActivateSchemaToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ShowGuidsCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ExcelExportButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;CollapseToolStripMenuItem.Name" xml:space="preserve">
     <value>CollapseToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;imageList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;UnhiddenCheckBox.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
-  <data name="ExpandToolStripMenuItem.Text" xml:space="preserve">
-    <value>Expand</value>
+  <data name="&gt;&gt;ExcelExportButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ShowToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ShowToolStripMenuItem.Name" xml:space="preserve">
+    <value>ShowToolStripMenuItem</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ExcelExportButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="imageList.ImageSize" type="System.Drawing.Size, System.Drawing">
+    <value>32, 32</value>
+  </data>
+  <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 142</value>
   </data>
   <data name="&gt;&gt;HiddenToolStripMenuItem.Name" xml:space="preserve">
     <value>HiddenToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;RangeEditor.Parent" xml:space="preserve">
+  <data name="PictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>CenterImage</value>
+  </data>
+  <data name="PictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="&gt;&gt;ExcelExportButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="PictureBox.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;tv.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ExcelExportButton.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="RangeEditor.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="UnhiddenCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="UnhiddenCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 11</value>
+  </data>
+  <data name="RangeEditor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>107, 6</value>
+  </data>
+  <data name="ShowGuidsCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;tv.Name" xml:space="preserve">
+    <value>tv</value>
+  </data>
+  <data name="&gt;&gt;DropDownEditor.Name" xml:space="preserve">
+    <value>DropDownEditor</value>
+  </data>
+  <data name="&gt;&gt;ShowGuidsCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="ExcelExportButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 23</value>
+  </data>
+  <data name="&gt;&gt;ShowGuidsCheckBox.Name" xml:space="preserve">
+    <value>ShowGuidsCheckBox</value>
+  </data>
+  <data name="RangeEditor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>292, 23</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FrmPowerCFG</value>
+  </data>
+  <data name="ExpandToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="&gt;&gt;PictureBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ExpandToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip.Name" xml:space="preserve">
+    <value>contextMenuStrip</value>
+  </data>
+  <data name="&gt;&gt;tv.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PictureBox.Name" xml:space="preserve">
+    <value>PictureBox</value>
+  </data>
+  <data name="UnhiddenCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 19</value>
+  </data>
+  <data name="DropDownEditor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>107, 23</value>
+  </data>
+  <data name="tv.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="RangeEditor.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PictureBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;DropDownEditor.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ExcelExportButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>693, 8</value>
-  </data>
-  <data name="&gt;&gt;ExpandToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="tv.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="imageList.ImageSize" type="System.Drawing.Size, System.Drawing">
-    <value>32, 32</value>
-  </data>
   <data name="&gt;&gt;imageList.Name" xml:space="preserve">
     <value>imageList</value>
   </data>
-  <data name="PictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>693, 37</value>
+  <data name="&gt;&gt;RangeEditor.Type" xml:space="preserve">
+    <value>PowerCFG.Components.RangeEditor, PowerCFG, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;contextMenuStrip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;ExpandToolStripMenuItem.Name" xml:space="preserve">
+    <value>ExpandToolStripMenuItem</value>
   </data>
-  <data name="DropDownEditor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 23</value>
+  <data name="&gt;&gt;PictureBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;RangeEditor.Name" xml:space="preserve">
+    <value>RangeEditor</value>
+  </data>
+  <data name="ExpandToolStripMenuItem.Text" xml:space="preserve">
+    <value>Expand</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem2.Name" xml:space="preserve">
+    <value>toolStripMenuItem2</value>
+  </data>
+  <data name="&gt;&gt;UnhiddenCheckBox.Name" xml:space="preserve">
+    <value>UnhiddenCheckBox</value>
   </data>
   <data name="CopyGUIDToolStripMenuItem.Text" xml:space="preserve">
     <value>Copy GUID</value>
   </data>
-  <data name="&gt;&gt;ShowGuidsCheckBox.Name" xml:space="preserve">
-    <value>ShowGuidsCheckBox</value>
-  </data>
-  <data name="ExcelExportButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 142</value>
-  </data>
-  <data name="HiddenToolStripMenuItem.Text" xml:space="preserve">
-    <value>Hidden</value>
-  </data>
-  <data name="UnhiddenCheckBox.Text" xml:space="preserve">
-    <value>Visibles</value>
-  </data>
-  <data name="ExpandToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
-  </data>
-  <data name="UnhiddenCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="ShowToolStripMenuItem.Text" xml:space="preserve">
-    <value>Show</value>
-  </data>
-  <data name="&gt;&gt;tv.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="UnhiddenCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 11</value>
-  </data>
   <data name="ShowToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>162, 22</value>
   </data>
-  <data name="&gt;&gt;ShowGuidsCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;imageList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ShowGuidsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>701, 417</value>
+  <data name="&gt;&gt;ActivateSchemaToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ShowGuidsCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 15</value>
+  </data>
+  <data name="tv.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;UnhiddenCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="HiddenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="ShowGuidsCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
   </data>
   <data name="PictureBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 64</value>
   </data>
-  <data name="&gt;&gt;tv.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="CollapseToolStripMenuItem.Text" xml:space="preserve">
+    <value>Collapse</value>
   </data>
-  <data name="tv.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 37</value>
+  <data name="&gt;&gt;ShowGuidsCheckBox.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="&gt;&gt;ExcelExportButton.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>159, 6</value>
+  </data>
+  <data name="ExcelExportButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>693, 8</value>
+  </data>
+  <data name="ShowGuidsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>701, 417</value>
+  </data>
+  <data name="ShowToolStripMenuItem.Text" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="&gt;&gt;CopyGUIDToolStripMenuItem.Name" xml:space="preserve">
+    <value>CopyGUIDToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;RangeEditor.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ActivateSchemaToolStripMenuItem.Name" xml:space="preserve">
+    <value>ActivateSchemaToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;UnhiddenCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;HiddenToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="DropDownEditor.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="ShowGuidsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 19</value>
+  <data name="ActivateSchemaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
   </data>
-  <data name="&gt;&gt;HiddenToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;DropDownEditor.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="UnhiddenCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ShowGuidsCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CollapseToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItem2.Name" xml:space="preserve">
-    <value>toolStripMenuItem2</value>
+  <data name="tv.Size" type="System.Drawing.Size, System.Drawing">
+    <value>671, 399</value>
   </data>
-  <data name="PictureBox.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="HiddenToolStripMenuItem.Text" xml:space="preserve">
+    <value>Hidden</value>
   </data>
-  <data name="&gt;&gt;UnhiddenCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ActivateSchemaToolStripMenuItem.Text" xml:space="preserve">
+    <value>Activate Schema</value>
   </data>
-  <data name="ShowGuidsCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+  <data name="UnhiddenCheckBox.Text" xml:space="preserve">
+    <value>Visibles</value>
   </data>
-  <data name="&gt;&gt;PictureBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>769, 450</value>
   </data>
-  <data name="ActivateSchemaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="DropDownEditor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>292, 23</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="&gt;&gt;ExcelExportButton.Name" xml:space="preserve">
+    <value>ExcelExportButton</value>
+  </data>
+  <data name="&gt;&gt;RangeEditor.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="ShowGuidsCheckBox.Text" xml:space="preserve">
+    <value>Guids</value>
+  </data>
+  <data name="&gt;&gt;tv.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="CollapseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>162, 22</value>
   </data>
-  <metadata name="imageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>166, 17</value>
-  </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
+  <data name="DropDownEditor.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="CopyGUIDToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="&gt;&gt;DropDownEditor.Type" xml:space="preserve">
+    <value>PowerCFG.Components.DropDownEditor, PowerCFG, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="PictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>693, 37</value>
+  </data>
+  <data name="&gt;&gt;CopyGUIDToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tv.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 37</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Power CFG</value>
+  </data>
   <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="imageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>166, 17</value>
+  </metadata>
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, System.Private.CoreLib, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
     <value>es</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
 </root>
