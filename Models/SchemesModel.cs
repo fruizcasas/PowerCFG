@@ -26,8 +26,17 @@ namespace PowerCFG.Models
                 sb.Append('\t');
                 foreach (var scheme in Values)
                 {
-                    sb.Append(Q($"{scheme.Name}")); sb.Append('\t');
+                    sb.Append(Q($"{SchemeModel.NameForGuid(scheme.Id)}")); sb.Append('\t');
                     sb.Append(Q($"{scheme.Id}")); sb.Append('\t');
+                }
+                sb.AppendLine();
+                sb.Append('\t');
+                sb.Append('\t');
+                sb.Append('\t');
+                foreach (var scheme in Values)
+                {
+                    sb.Append(Q($"{scheme.Name}")); sb.Append('\t');
+                    sb.Append('\t');
                 }
                 sb.AppendLine();
                 //  Headers
@@ -41,8 +50,9 @@ namespace PowerCFG.Models
                 }
                 sb.Append(Q(nameof(SettingModel.Description))); sb.Append('\t');
                 sb.Append(Q(nameof(SettingModel.Id))); sb.Append('\t');
-                sb.Append("Show"); sb.Append('\t');
-                sb.Append("Hidden");
+                sb.Append(Q("Alias")); sb.Append('\t');
+                sb.Append(Q("Show")); sb.Append('\t');
+                sb.Append(Q("Hidden"));
                 sb.AppendLine();
                 foreach (var group in firstScheme.Groups.Values)
                 {
@@ -60,6 +70,7 @@ namespace PowerCFG.Models
                         }
                         sb.Append(Q(group.Description)); sb.Append('\t');
                         sb.Append(Q($"{group.Id}")); sb.Append('\t');
+                        sb.Append(Q($"{GroupModel.NameForGuid(group.Id)}")); sb.Append('\t');
                         sb.Append(Q(show ? "Show" : "")); sb.Append('\t');
                         sb.AppendLine();
                         foreach (var setting in group.Settings.Values)
@@ -76,6 +87,7 @@ namespace PowerCFG.Models
                                 }
                                 sb.Append(Q(setting.Description)); sb.Append('\t');
                                 sb.Append(Q($"{setting.Id}")); sb.Append('\t');
+                                 sb.Append(Q($"{SettingModel.NameForGuid(setting.Id)}")); sb.Append('\t');
                                 sb.Append(Q((setting.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC) == POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC ? "Show" : "")); sb.Append('\t');
                                 sb.Append(Q((setting.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_HIDE) == POWER_ATTR.POWER_ATTRIBUTE_HIDE ? "Hidden" : "")); sb.Append('\t');
                                 sb.AppendLine();

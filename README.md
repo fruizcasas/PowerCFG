@@ -4,11 +4,12 @@
  * Restore to default values individually.
 ![ScreenShot](ScreenShot.png)
  * Save (As Administrator), Restore, Duplicate & Delete Schemes
-![ScreenShot2](ScreenShot2.png)
+ ![ScreenShot3](ScreenShot3.png)
  * Import saved Schemes from .POW files.
  * Runs in net6 C#
  * The IDE is similar a windows energy plan viewer.
- ![ScreenShot3](ScreenShot3.png)
+ * You can see & copy associated GUIDS and internal aliases 
+![ScreenShot2](ScreenShot2.png)
 
  * You can export all configurations pasting in Excel the exported values.
 
