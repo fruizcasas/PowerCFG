@@ -16,9 +16,11 @@
 
   <ItemGroup>
     <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0" />
+    <PackageReference Include="Vanara.PInvoke.Kernel32" Version="3.4.9" />
     <PackageReference Include="Vanara.PInvoke.PowrProf" Version="3.4.9" />
     <PackageReference Include="Vanara.PInvoke.Shell32" Version="3.4.9" />
     <PackageReference Include="Vanara.PInvoke.User32" Version="3.4.9" />
+    <PackageReference Include="Vanara.SystemServices" Version="3.4.9" />
   </ItemGroup>
 
   <ItemGroup>

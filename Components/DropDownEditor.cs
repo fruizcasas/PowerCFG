@@ -151,7 +151,7 @@ namespace PowerCFG.Components
                 if (DCMode)
                 {
                     Setting.DCValue = item.Value;
-                    Win32Error err = PowerWriteDCValueIndex(default, Setting.SchemaId, Setting.SubgroupId, Setting.Id, (uint)item.Index);
+                    Win32Error err = PowerWriteDCValueIndex(default, Setting.SchemeId, Setting.SubgroupId, Setting.Id, (uint)item.Index);
                     if (err.Failed)
                     {
                         MessageBox.Show(this, err.FormatMessage(), "PowerWriteDCValueIndex", MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
@@ -160,7 +160,7 @@ namespace PowerCFG.Components
                 else
                 {
                     Setting.ACValue = item.Value;
-                    Win32Error err = PowerWriteACValueIndex(default, Setting.SchemaId, Setting.SubgroupId, Setting.Id, (uint)item.Index);
+                    Win32Error err = PowerWriteACValueIndex(default, Setting.SchemeId, Setting.SubgroupId, Setting.Id, (uint)item.Index);
                     if (err.Failed)
                     {
                         MessageBox.Show(this, err.FormatMessage(), "PowerWriteACValueIndex", MessageBoxButtons.OK, icon: MessageBoxIcon.Error);

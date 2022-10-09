@@ -139,4 +139,22 @@
   <data name="Restore to" xml:space="preserve">
     <value>Restaurar a {0}</value>
   </data>
+  <data name="New Scheme Name" xml:space="preserve">
+    <value>Plan de Energia nuevo</value>
+  </data>
+  <data name="Saving Power Scheme" xml:space="preserve">
+    <value>Salvando plan de energía</value>
+  </data>
+  <data name="Admin Reserved" xml:space="preserve">
+    <value>Ejecute el programa como administrador</value>
+  </data>
+  <data name="Do you want to delete the schema" xml:space="preserve">
+    <value>¿Desea borrar el plan de energia '{0}'?</value>
+  </data>
+  <data name="Do you want to duplicate the schema" xml:space="preserve">
+    <value>¿Desea duplicar el plan de energia '{0}'?</value>
+  </data>
+  <data name="RangeFromToIncrement" xml:space="preserve">
+    <value>Desde {0} hasta {1} cada {2} {3}</value>
+  </data>
 </root>

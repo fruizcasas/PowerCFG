@@ -139,4 +139,22 @@
   <data name="Restore to" xml:space="preserve">
     <value>Restore to {0}</value>
   </data>
+  <data name="New Scheme Name" xml:space="preserve">
+    <value>New Scheme</value>
+  </data>
+  <data name="Saving Power Scheme" xml:space="preserve">
+    <value>Saving Power Scheme</value>
+  </data>
+  <data name="Admin Reserved" xml:space="preserve">
+    <value>Run the program as Administrator</value>
+  </data>
+  <data name="Do you want to delete the schema" xml:space="preserve">
+    <value>Do you want to delete the schema '{0}'?</value>
+  </data>
+  <data name="Do you want to duplicate the schema" xml:space="preserve">
+    <value>Do you want to duplicate the schema '{0}'?</value>
+  </data>
+  <data name="RangeFromToIncrement" xml:space="preserve">
+    <value>From {0} to {1} step {2}  {3}</value>
+  </data>
 </root>

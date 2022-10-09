@@ -59,118 +59,170 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ExpandToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 32</value>
+    <value>146, 22</value>
   </data>
   <data name="ExpandToolStripMenuItem.Text" xml:space="preserve">
     <value>Expandir</value>
   </data>
   <data name="CollapseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 32</value>
+    <value>146, 22</value>
   </data>
   <data name="CollapseToolStripMenuItem.Text" xml:space="preserve">
     <value>Contraer</value>
   </data>
-  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 6</value>
+  <data name="CopyGUIDToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="CopyGUIDToolStripMenuItem.Text" xml:space="preserve">
+    <value>Copiar GUID</value>
   </data>
   <data name="HiddenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 32</value>
+    <value>146, 22</value>
   </data>
   <data name="HiddenToolStripMenuItem.Text" xml:space="preserve">
     <value>Oculto</value>
   </data>
   <data name="ShowToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 32</value>
+    <value>146, 22</value>
   </data>
   <data name="ShowToolStripMenuItem.Text" xml:space="preserve">
     <value>Mostrar</value>
   </data>
-  <data name="ActivateSchemaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 32</value>
+  <data name="ImportSchemeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
   </data>
-  <data name="ActivateSchemaToolStripMenuItem.Text" xml:space="preserve">
-    <value>Activar Plan</value>
+  <data name="ImportSchemeToolStripMenuItem.Text" xml:space="preserve">
+    <value>Importar plan</value>
   </data>
-  <data name="CopyGUIDToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 32</value>
+  <data name="ActivateSchemeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
   </data>
-  <data name="CopyGUIDToolStripMenuItem.Text" xml:space="preserve">
-    <value>Copiar GUID</value>
+  <data name="ActivateSchemeToolStripMenuItem.Text" xml:space="preserve">
+    <value>Activar plan</value>
+  </data>
+  <data name="SaveSchemeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="SaveSchemeToolStripMenuItem.Text" xml:space="preserve">
+    <value>Salvar plan</value>
+  </data>
+  <data name="DuplicateSchemeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="DuplicateSchemeToolStripMenuItem.Text" xml:space="preserve">
+    <value>Duplicar plan</value>
+  </data>
+  <data name="DeleteSchemeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 22</value>
+  </data>
+  <data name="DeleteSchemeToolStripMenuItem.Text" xml:space="preserve">
+    <value>Eliminar plan</value>
   </data>
   <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 202</value>
+    <value>147, 224</value>
   </data>
-  <data name="tv.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 62</value>
+  <data name="imageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAEZTeXN0ZW0uV2luZG93cy5Gb3JtcywgQ3VsdHVyZT1uZXV0cmFs
+        LCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5BQEAAAAmU3lzdGVtLldpbmRvd3MuRm9ybXMu
+        SW1hZ2VMaXN0U3RyZWFtZXIBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAdhMAAAJNU0Z0AUkBTAIBAQYB
+        AAGQAQABkAEAARABAAEQAQAE/wEZAQAI/wFCAU0BNgcAATYDAAEoAwABQAMAASADAAEBAQABGAYAARgb
+        AAP/A/YBogGxAZ0BSAGIAT0BNgGEASwBPgGDATIBgQGcAXoBvQG/AbkD9wwAA+8DvSe8A85pAAHjAeYB
+        4QGIAdsBhgFqAa8BgwGRAekBjgFtAcsBaQFQAbABTQFSAbMBTQFuAdMBaQEtAX4BIwPvA/4GAAPpKv8B
+        zAFIAT9mAAL6AfsBcQGFAXYBagGUAZwBtQHeAe8BIAFJAWYBlgHaAZgBSAFqAUcBUQGMAVIBTAGiAUsB
+        XAG8AVgG5wP9AwAD6QP/AfwC+wH8AvsB/AL7A/4J/wH8AvsB/AL7AfwC+wH8AvsB/AL7Af4C/QHMAUgB
+        P2YAAbUBwwHPAb0B5wH3AR8BRwFlAV8BiQGEAbgB3gHuAWoBkQGwAWkBYQFlAUkBNgE1ATIBLwEqAXwB
+        xgF+A+oD7AP1A/4D6QP/AfkC+AH5AvgG/wHfAbUBfwHaAa4BdQGdAWgBMgP9B/8C/gH7AvoB+wL6AcwB
+        SAE/aQABeAGLAXwBjgG5Ac0BjQG+Ad4B0wG/AcABrgGtAbgBlAGEAYIBPwEwAS0BQQEwAS4BKwEbARoB
+        kAGLAYkD9AP6A/4D6QP/AvYB9QL4AfcDggP/AecB0QG3AcMBlQFdAZ4BaQEyAfoC+wL/Af4C/QP8AfsC
+        +AH3AvgB9wHMAUgBP2kAAY8BnAF+AY8B5gGNAXUBbwFxAV8BVAFRAV0BUAFOAWwBYAFfAWsBYQFfAWkB
+        XgFdATIBIwEiATsBKAEnA/0D/gP/A+kC/wH+AvMB8gL1AfQDgQH5AfsB/QGkAW4BNQGlAXABOAHFAaQB
+        gAHzAfQD8wHyAvMB8gLzAfIC8wHyAfQB9QHzAcwBSAE/aQABjwGcAX4BgAHjAXsBqgH6AacBXQFqAVcB
+        XQFSAVEBbgFiAWABaQFbAVoBYAFUAVMBTAFAAT4BMwEjASIBuwK5BgAD6QH+Av0B8QLwAfMC8gOCAvQB
+        9QH4AfwB/wH5Af0B/wH2AfgB+wHxAfAC8QLwAfEC8AHxAvAB8QLwAfIC8QHMAUgBP2kAAY8BnAF+AXsB
+        4gF2AZ4B/wGZAYoB6AGGAXYBywF1AVcBewFUAkQBOgE7ATgBMQEuASsBJQE/ATABLgFjAUkBSwHVAtQD
+        AAPpAf0C/AHuAu0B8ALvA4UB+wH9Af8B3wG1AX8B2gGuAXYBngFqATQD8gH2AvUB9ALzAfQC8gHwA+8C
+        7gHMAUgBP2kAAY8BnAF+AYAB6AF6AakB/wGjAYMB6gF9AV0BwgJYAboBVAFGAaUBQwE8AZkBOQFmAcMB
+        YgMAAcgCwwF0AWEBYwPvA+kD+wHrAuoB7QLsA4UB+AH7Af8B5wHRAbgBwwGVAV0BnwFqATQD7wHzAvIB
+        8QPwAu8B7QPsAusBzAFIAT9pAAGPAZwBfgGCAeoBfAGwAf8BqwGCAeoBfAFaAcICVAG8AU4BNQGcAS8B
+        KAGPASIBVAG8AU4GAAFcAUABQQGSAXwBfgPpAfwC+wHoAucB6gHoAekDhAHtAe4B8QGlAW8BNgGmAXEB
+        OQHBAaEBfQLoAekB6ALnAegC5wHoAucB6ALnAegB5wHoAcwBSAE/ZgABbQFMAU8BjwGcAX4BgwHrAX0B
+        sAH/AasBggHqAXwBWgHCAVQBVgG+AVABNgGeATABKgGSASQBTwG3AUkGAAGAAWcBaAGTAXsBfQPpAfwC
+        +wHnAeYB5wHsAe0B8gGFAYoBkALrAe4B5wHmAucB5gLnAeUC5gLkAeYC5AHmAuQB5gLkAeYC5AHmAuQB
+        zAFIAT9jAAFuAVIBVAHJAb4BvwGPAZwBfgGBAekBewGrAf8BpgGCAeoBfAFWAb4BUAFPAbcBSQEyAZoB
+        LAErAZMBJQFIAbABQgGBAXABcgFjAUUBRwFdATYBOQHxAvAD6QH8AvsB6AHpAe4B3wG1AX8B2wGvAXcB
+        oAFsATUB5AHjAeQB5QHiAeMB5ALiAeQC4gHkAeEB4gHkAuIB4wLhAeMC4QHjAuEBzAFIAT9gAAHvAu0B
+        iQF3AXgDAAGPAZwBfgFtAdABZgGxAckBqAHTAdIBywHaAdQB0wHVAdABzgGwAawBogFZAXMBRwFBAacB
+        OwFnAUUBSAGSAX0BfgH1AvQDAAPpAfwC+wHlAegB6wHnAdEBtwHDAZUBXQGgAWwBNQPlAmUBZgGhAqID
+        oQHnAeYB5QGiAqMC4gLgAd8B3gHgAd8B3gHMAUgBP2AAAagBoAGhA/kDAAHaAd0B1gG4AbsBngHdAdgB
+        1wHYAtQB5wLkAdwC1QGmAZEBkwG3AasBrAGDAYIBeQwAA+kB/gL9Ad8B4QHjAacBcQE4AacBcgE6Ab4B
+        nAF5Ad4C3QLeAd0B3gHdAdwB3gHdAdwC3QHcAd4B3QHcAd0B3AHbAd0B3AHbAdwB2wHaAcwBSAE/YAAB
+        ygLGBgAD/wP6AbIBoAGPAfEB7QHqAf8B8AHVAbsBogFzAXkCbgGwAqwD+gwAA+oD/wHbAdkB2AHbAtoB
+        2wLaAdsC2QHbAdkB2AHbAdkB2AHbAdkB2AHbAdkB2AHbAdkB2AHbAdkB2AHbAdkB2AHbAdkB2AHaAdgB
+        1wHMAUgBP2AAA/4MAAP+Ae8C7gHFAb0BswHHAcABuRUAA/sBzAFIAT8BzAFIAT8BzAFIAT8BzAFIAT8B
+        zAFIAT8BzAFIAT8BzAFIAT8BzAFIAT8BzAFIAT8BzAFIAT8BzAFIAT8BzAFIAT8BzAFIAT8BzAFIAT8B
+        zAFIAT9gADD/PAAD/gHnAuYB3QLYAd8C2AHgAtkB4gLcAeQC4AP4GAAD/gPmAdoC2QHbAtkB2wLaA9wB
+        4gLgA/gMADD/GAAD/gP7A90D2AP4EgAD7wHUAtABxgLAAYwCgQFXAT0BPgFOAS8BMAFuAlwBsgKqAd0C
+        1gHlAuED/g8AA+8B0QLQAcICwQGJAoEBVgE9AT4BTgEvATABbAFcAV0BrwKrAdgC1wHjAuID/gYAMP8P
+        AAP9A/gB0QLQAZgCkwHcAdEBzAH3AeoB2QHhAdEBwAGxAbABsQP1DAAB4wLiAcYCwQGAAnMBXgE9AT4B
+        YwFCAUMBYwFCAUMBYwFCAUMBYAE/AUABXAE7ATwBUwIzAcoCwwHjAt8D/gkAA+IBwgLBAX0CcwFgAUAB
+        QQFmAUYBRwFmAkYBZgJGAWMCQwFfAT8BQAFUAjQBxQLEAeEC3wP+AwAw/wYAA/wD8gG8ArsBrgGrAaoB
+        5wLkAfAC7wH6AfgB8wHuAeQB2AHsAd0BzQHiAdABugHPAb4BqQGDAoAD8gYAA/MBvAK0AW4CXAFzAVEB
+        UgF1AVQBVQFzAVEBUgFuAUwBTQFqAkkBaQJIAWgCRwFjAUIBQwFXATUBNgHKAsMB5QLiBgAD8wG2ArUB
+        bQFcAV0BdAJTAXgCVwFzAVIBUwFsAk0BagFLAUwBaAJKAWkCSQFlAUUBRgFZATgBOQHFAsQD4wMAMP8D
+        +wO0AcUCvQH6AvUB4gLhAYoCiwNyAW0CbgGiAaABnwGRAYkBgwFIATwBOQE8ASkBJgE8AScBIgFBATsB
+        OgFXAlUD7QMAAbACrAGSAokBfgJdAYcBZQFmAXwCXQGLAnoBywLGAc0CyAGEAnMBZQJFAWgCRwFjAUIB
+        QwFTAjQB3wLYA/gDAAGtAqwBjgKKAYABXgFfAYcBaAFpAXACWQGWAo0E7wLuAY4ChAFZAj4BaAJIAWYC
+        RgFUAjUB2QLYA/gw/wPwAcUBvgG/AeEC2gHyAu0B4gLgAaEBngGfAV8CWwFMAUMBQQE+ATEBLwFMAT4B
+        OwFFATUBMAE9ASoBJgFBATEBLgFDATQBMQFCATMBLwHhAuAB8gLxAawCpQFoAkcBlgJ1AY4CbwHHAsIB
+        /QL8AcUCvwHCArwD/AHFAsABZAJFAWcCRgFcATsBPAG0AqwB5QLgA/EBpwKlAWkCSAGUAXcBeAGEAWsB
+        bAHkAeIB4wn/AdYC1AHTAs8BXAJAAWgCSAFfAT8BQAGwAqwD4TD/BgAB3wLeAWkBZgFnAU0BSwJMAUcB
+        SAFMAUUBRAFIAT0BPAFFATYBMwFCATMBMAFSAUgBRwGKAoYBtQGwAa4BmAGIAYQBkAGEAYMB0wLSAcUC
+        wwGiApsBjQFrAWwBpQGIAYkBoAGRAZID+gGLAXQBdQGeAn8BkwFyAXMBcQFWAVcD+QGHAncBaQJIAWAB
+        PwFAAW4BXAFdAeIC3AHEAsMBnQKcAY4BbQFuAaYBiQGKAaECmgn/AbABqgGrAW8CWQFfAUYBRwGJAnoB
+        ZgFHAUgBYgFCAUMBbAFcAV0D3DD/CQAD/wHZAtcBawFgAV4BswGwAa8BtwGuAawBlgF2AWwBiQFVAUUB
+        mwFXAUIBsAFmAU8BuQF2AWEBoAFmAVUBmQKVAwABlAKRAZQCjgGoAYwBjQG1AZ0BngHVAtIB0ALNAb8B
+        rAGtAboCpAGrApABmQJ4Ab4CuAHPAssBagJJAWMBQgFDAU4BMAExAeAC2AOTAZACjwGqAY4BjwGyAZ4B
+        nwH1AvQG/wHmAuUBgwJyAYcCcAFzAlkBxQK+AWoBTQFOAWYBRQFGAU4BMAExAdoC2TD/BgABUQHrAXQB
+        RwHoAWsD/QGAAXsBeQGQAUgBNAGYAU8BOwGkAWMBTwGuAXEBXgGxAXcBZgGyAXoBaAGcAV4BSwGNAokG
+        AAGoAqUBkgKMAa8BlQGWAcIBrgGvAdkB1gHXAdMC0QHSAsQBuQKsAasBmQGaAagBjAGNAcACugHSAs0B
+        bgFMAU0BYwFCAUMBWAI/AdwC1AOmAY4CjQGxAZcBmAG+AqwB9QL0A/8D/gGWAo0BpAKUAZYCgQF8AmYB
+        yQLDAW0CTwFnAUYBRwFXAT8BQAHXAtUw/wMAAVcB7gF5AUQB5AFnASABzgE/AUcB6AFrAZIBPAEmAZEB
+        SgE2AZkBUQE/AaIBXQFIAagBZQFSAawBcQFeAZwBWQFGAZQCkQkAA9sBlwKQAZwBfAF9Ac0BvgG/AbkC
+        sgP6AcEBuQG6AdQD0gLQAZ4BiQGKAfkC+AGQAoABcgFQAVEBYwFCAUMBjAKAAdkC1APbA5EBnQF/AYAB
+        xAK1AbECrQP/AfYC9QGjApgBsgKjAZ8CjgF0AmEBlwKMAXEBUwFUAWYBRgFHAYkCgQPUMP8GAAFTAewB
+        dgEsAdUBSwGQAUEBKwGNAT8BKwGNAUIBLwGPAUQBMAGSAUUBMQGRAUYBMwGZAV0BTgGfApsD/QkAA/sB
+        igKGAXEBYQFiAcwCugHPAsMB2ALXAdACzQHWAtQB0wLRAb8BtwG4AdECzQF9Al4BdAFTAVQBXgE9AT4B
+        wAK6AeYC5AP7A4YBcAJiAcYCswG2AqsD7AHlAuQBpAKZAacCmgGGAnkB0wLPAXkCYgF4AlgBYAFAAUEB
+        vAK6AeUC5DD/BgABWAHuAXsBMQHYAVEBmAFsAWMBmQGCAX0BmAGRAZABlwKTAbQCsgPvA/4SAAGpAqgB
+        jQKGAacBiwGMAdcCyQHTAckBygHRAskB1ALTAdICzgGqAZQBlQGSAnIBhQJkAXEBTwFQAX4BcQFyAcoC
+        wgP+AwADqAGHAoYBqAGMAY0BzgLBAbYCrQG5ArYB7gHsAe0B6gLpAa8CpwGPAXkBegGIAmwBdAJTAXsC
+        cgHGAsQD/jD/BgABOAGdAS0BOQHdAVoB8wH1AfMkAAP7AZECjQGEAn4BpgGKAYsB0ALBAdQCxgG2AqYB
+        pwKUAacBiwGMAZMBcgFzAXwBWwFcAW0CXAG/ArkB7wLuBgAD+wONAX8CfgGnAYsBjAHIArcBywK7AcMC
+        tAG4AacBqAGqAZEBkgGWAXkBegF+AV4BXwFrAlwBuwK6A+4DADD/BgABxQHYAcABWQHtAXoBNgGTASgn
+        AAPzAZECjQGMAoQBcAJgAZoCfAGvAZUBlgGnAYsBjAGKAWgBaQFlAkYBjQKFAbMCrAHeAt0MAAPzA40B
+        hgKFAW4BYAFhAZsCfwGyAZgBmQGqAY4BjwGLAWsBbAFmAkcBiQKFAa4CrQHeAt0GADD/CQABzgHeAcoB
+        PgGmATkBVAGmAVInAAP7AakCqAGKAoYBkwKOAYwChgGNAoYBmgKUAaYCnwGsAqcD5xIAA/sDqAGHAoYB
+        jwKOAYgChwGIAocBlgKUAaACnwGoAqcD5wkAMP8/AAP7A9sBqAKlAZQCkQHCAsEB7wLuHgAD+wPbA6YD
+        kQPBA+4PAAFCAU0BPgcAAT4DAAEoAwABQAMAASADAAEBAQABAQYAAQEWAAP/AQAB4AEPBgAB4AEDBgAB
+        wAEBBgABwAcAAeAHAAHgBwAB4AEDBgAB4AEBBgAB4AEIBgAB4AEMBgABwAEMBgABgAcAASABAQYAASAB
+        DwYAAWABDwYAAXgBfwgAAv8B8AEPAfABDwIAAf8BBwHgAQMB4AEDAgAB+AEDAcABAQHAAQECAAHAAQEB
+        gAEBAYABAQQAAYABAAGACwABwAcAAeABAQYAAcABAwYAAYABBwYAAcABBwYAAcABHwGAAQABgAMAAccB
+        /wGAAQEBgAEBAgABxwH/AcABAwHAAQMCAAHjAf8B4AEHAeABBwIAAv8B+AEfAfgBHws=
+</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tv.SelectedImageIndex" type="System.Int32, mscorlib">
+    <value>-1</value>
+  </data>
+  <data name="tv.SelectedImageKey" xml:space="preserve">
+    <value>node</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tv.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="tv.Size" type="System.Drawing.Size, System.Drawing">
-    <value>957, 662</value>
-  </data>
-  <data name="UnhiddenCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 18</value>
-  </data>
-  <data name="UnhiddenCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="UnhiddenCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 29</value>
-  </data>
-  <data name="PictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>990, 62</value>
-  </data>
-  <data name="PictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="PictureBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 107</value>
-  </data>
-  <data name="RangeEditor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 10</value>
-  </data>
   <data name="RangeEditor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 8, 6, 8</value>
-  </data>
-  <data name="RangeEditor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 38</value>
-  </data>
-  <data name="DropDownEditor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 38</value>
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="DropDownEditor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 8, 6, 8</value>
-  </data>
-  <data name="DropDownEditor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 38</value>
-  </data>
-  <data name="ShowGuidsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>998, 698</value>
-  </data>
-  <data name="ShowGuidsCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="ShowGuidsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 29</value>
-  </data>
-  <data name="ExcelExportButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>990, 13</value>
-  </data>
-  <data name="ExcelExportButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="ExcelExportButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 38</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>10, 25</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1099, 750</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="$this.Text" xml:space="preserve">

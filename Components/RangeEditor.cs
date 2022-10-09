@@ -16,6 +16,7 @@ using Vanara.Extensions;
 using static Vanara.PInvoke.PowrProf;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static PowerCFG.Components.DropDownEditor;
+using Vanara.Extensions.Reflection;
 
 namespace PowerCFG.Components
 {
@@ -43,6 +44,7 @@ namespace PowerCFG.Components
                 NameLabel.Text = $"{(dc ? Properties.Resources.On_battery : Properties.Resources.On_AC_Power)} ({setting.Units})";
                 RestoreDefaultButton.Visible = dc ? Setting.DCDefaultIndex.HasValue : Setting.ACDefaultIndex.HasValue;
                 toolTip.SetToolTip(RestoreDefaultButton, String.Format(Properties.Resources.Restore_to, dc ? Setting.DCDefaultIndexString() : Setting.ACDefaultIndexString()));
+                toolTip.SetToolTip(ValueNumericUpDown, String.Format(Properties.Resources.RangeFromToIncrement, setting.Minimum, setting.Maximum, setting.Increment, setting.Units));
 
                 float captionWith = canvas.MeasureString(NameLabel.Text, Font).Width * 105 / 100;
                 float buttonWith = RestoreDefaultButton.Width;
@@ -114,7 +116,7 @@ namespace PowerCFG.Components
                     try
                     {
                         Setting.DCValue = (uint)ValueNumericUpDown.Value;
-                        Win32Error err = PowerWriteDCValueIndex(default, Setting.SchemaId, Setting.SubgroupId, Setting.Id, (uint)ValueNumericUpDown.Value);
+                        Win32Error err = PowerWriteDCValueIndex(default, Setting.SchemeId, Setting.SubgroupId, Setting.Id, (uint)ValueNumericUpDown.Value);
                         if (err.Failed)
                         {
                             MessageBox.Show(this, err.FormatMessage(), "PowerWriteDCValueIndex", MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
@@ -130,7 +132,7 @@ namespace PowerCFG.Components
                     try
                     {
                         Setting.ACValue = (uint)ValueNumericUpDown.Value;
-                        Win32Error err = PowerWriteACValueIndex(default, Setting.SchemaId, Setting.SubgroupId, Setting.Id, (uint)ValueNumericUpDown.Value);
+                        Win32Error err = PowerWriteACValueIndex(default, Setting.SchemeId, Setting.SubgroupId, Setting.Id, (uint)ValueNumericUpDown.Value);
                         if (err.Failed)
                         {
                             MessageBox.Show(this, err.FormatMessage(), "PowerWriteACValueIndex", MessageBoxButtons.OK, icon: MessageBoxIcon.Error);

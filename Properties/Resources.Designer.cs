@@ -61,11 +61,38 @@ namespace PowerCFG.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Run the program as Administrator.
+        /// </summary>
+        public static string Admin_Reserved {
+            get {
+                return ResourceManager.GetString("Admin Reserved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Default Value {0}.
         /// </summary>
         public static string Default_Value {
             get {
                 return ResourceManager.GetString("Default Value", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Do you want to delete the schema &apos;{0}&apos;?.
+        /// </summary>
+        public static string Do_you_want_to_delete_the_schema {
+            get {
+                return ResourceManager.GetString("Do you want to delete the schema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Do you want to duplicate the schema &apos;{0}&apos;?.
+        /// </summary>
+        public static string Do_you_want_to_duplicate_the_schema {
+            get {
+                return ResourceManager.GetString("Do you want to duplicate the schema", resourceCulture);
             }
         }
         
@@ -76,6 +103,15 @@ namespace PowerCFG.Properties {
             get {
                 object obj = ResourceManager.GetObject("excel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a New Scheme.
+        /// </summary>
+        public static string New_Scheme_Name {
+            get {
+                return ResourceManager.GetString("New Scheme Name", resourceCulture);
             }
         }
         
@@ -117,11 +153,29 @@ namespace PowerCFG.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a From {0} to {1} step {2}  {3}.
+        /// </summary>
+        public static string RangeFromToIncrement {
+            get {
+                return ResourceManager.GetString("RangeFromToIncrement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Restore to {0}.
         /// </summary>
         public static string Restore_to {
             get {
                 return ResourceManager.GetString("Restore to", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Saving Power Scheme.
+        /// </summary>
+        public static string Saving_Power_Scheme {
+            get {
+                return ResourceManager.GetString("Saving Power Scheme", resourceCulture);
             }
         }
     }
