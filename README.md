@@ -15,3 +15,8 @@
  * You can export all configurations pasting in Excel the exported values.
 
  ![ExcelCapture](ExcelCapture.png)
+
+ ![ExcelCapture](ExcelCapture.png)
+
+ * Three integrated PowerCFG reports: Battery, Power & Energy Response
+  ![ScreenShot5](ScreenShot5.png)
