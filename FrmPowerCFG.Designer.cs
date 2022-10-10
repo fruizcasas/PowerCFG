@@ -43,7 +43,7 @@
             this.DuplicateSchemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteSchemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
-            this.UnhiddenCheckBox = new System.Windows.Forms.CheckBox();
+            this.HiddenCheckBox = new System.Windows.Forms.CheckBox();
             this.PictureBox = new System.Windows.Forms.PictureBox();
             this.RangeEditor = new PowerCFG.Components.RangeEditor();
             this.DropDownEditor = new PowerCFG.Components.DropDownEditor();
@@ -51,6 +51,14 @@
             this.ExcelExportButton = new System.Windows.Forms.Button();
             this.PowerSchemeSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.PowerSchemeOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.BatteryReportButton = new System.Windows.Forms.Button();
+            this.EnergyReportButton = new System.Windows.Forms.Button();
+            this.EnergyProgressBar = new System.Windows.Forms.ProgressBar();
+            this.PowerReportButton = new System.Windows.Forms.Button();
+            this.PowerReportBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.EnergyReportBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.PowerProgressBar = new System.Windows.Forms.ProgressBar();
+            this.BatteryBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.contextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.SuspendLayout();
@@ -72,7 +80,6 @@
             // 
             // contextMenuStrip
             // 
-            resources.ApplyResources(this.contextMenuStrip, "contextMenuStrip");
             this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ExpandToolStripMenuItem,
@@ -86,66 +93,67 @@
             this.DuplicateSchemeToolStripMenuItem,
             this.DeleteSchemeToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
+            resources.ApplyResources(this.contextMenuStrip, "contextMenuStrip");
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
             // ExpandToolStripMenuItem
             // 
-            resources.ApplyResources(this.ExpandToolStripMenuItem, "ExpandToolStripMenuItem");
             this.ExpandToolStripMenuItem.Name = "ExpandToolStripMenuItem";
+            resources.ApplyResources(this.ExpandToolStripMenuItem, "ExpandToolStripMenuItem");
             this.ExpandToolStripMenuItem.Click += new System.EventHandler(this.ExpandToolStripMenuItem_Click);
             // 
             // CollapseToolStripMenuItem
             // 
-            resources.ApplyResources(this.CollapseToolStripMenuItem, "CollapseToolStripMenuItem");
             this.CollapseToolStripMenuItem.Name = "CollapseToolStripMenuItem";
+            resources.ApplyResources(this.CollapseToolStripMenuItem, "CollapseToolStripMenuItem");
             this.CollapseToolStripMenuItem.Click += new System.EventHandler(this.CollapseToolStripMenuItem_Click);
             // 
             // CopyGUIDToolStripMenuItem
             // 
-            resources.ApplyResources(this.CopyGUIDToolStripMenuItem, "CopyGUIDToolStripMenuItem");
             this.CopyGUIDToolStripMenuItem.Name = "CopyGUIDToolStripMenuItem";
+            resources.ApplyResources(this.CopyGUIDToolStripMenuItem, "CopyGUIDToolStripMenuItem");
             this.CopyGUIDToolStripMenuItem.Click += new System.EventHandler(this.CopyGUIDToolStripMenuItem_Click);
             // 
             // HiddenToolStripMenuItem
             // 
-            resources.ApplyResources(this.HiddenToolStripMenuItem, "HiddenToolStripMenuItem");
             this.HiddenToolStripMenuItem.Name = "HiddenToolStripMenuItem";
+            resources.ApplyResources(this.HiddenToolStripMenuItem, "HiddenToolStripMenuItem");
             this.HiddenToolStripMenuItem.Click += new System.EventHandler(this.HiddenToolStripMenuItem_Click);
             // 
             // ShowToolStripMenuItem
             // 
-            resources.ApplyResources(this.ShowToolStripMenuItem, "ShowToolStripMenuItem");
             this.ShowToolStripMenuItem.Name = "ShowToolStripMenuItem";
+            resources.ApplyResources(this.ShowToolStripMenuItem, "ShowToolStripMenuItem");
             this.ShowToolStripMenuItem.Click += new System.EventHandler(this.ShowToolStripMenuItem_Click);
             // 
             // ImportSchemeToolStripMenuItem
             // 
-            resources.ApplyResources(this.ImportSchemeToolStripMenuItem, "ImportSchemeToolStripMenuItem");
             this.ImportSchemeToolStripMenuItem.Name = "ImportSchemeToolStripMenuItem";
+            resources.ApplyResources(this.ImportSchemeToolStripMenuItem, "ImportSchemeToolStripMenuItem");
             this.ImportSchemeToolStripMenuItem.Click += new System.EventHandler(this.ImportSchemeToolStripMenuItem_Click);
             // 
             // ActivateSchemeToolStripMenuItem
             // 
-            resources.ApplyResources(this.ActivateSchemeToolStripMenuItem, "ActivateSchemeToolStripMenuItem");
             this.ActivateSchemeToolStripMenuItem.Name = "ActivateSchemeToolStripMenuItem";
+            resources.ApplyResources(this.ActivateSchemeToolStripMenuItem, "ActivateSchemeToolStripMenuItem");
             this.ActivateSchemeToolStripMenuItem.Click += new System.EventHandler(this.ActivateSchemeToolStripMenuItem_Click);
             // 
             // SaveSchemeToolStripMenuItem
             // 
-            resources.ApplyResources(this.SaveSchemeToolStripMenuItem, "SaveSchemeToolStripMenuItem");
             this.SaveSchemeToolStripMenuItem.Name = "SaveSchemeToolStripMenuItem";
+            resources.ApplyResources(this.SaveSchemeToolStripMenuItem, "SaveSchemeToolStripMenuItem");
             this.SaveSchemeToolStripMenuItem.Click += new System.EventHandler(this.SaveSchemeToolStripMenuItem_Click);
             // 
             // DuplicateSchemeToolStripMenuItem
             // 
-            resources.ApplyResources(this.DuplicateSchemeToolStripMenuItem, "DuplicateSchemeToolStripMenuItem");
             this.DuplicateSchemeToolStripMenuItem.Name = "DuplicateSchemeToolStripMenuItem";
+            resources.ApplyResources(this.DuplicateSchemeToolStripMenuItem, "DuplicateSchemeToolStripMenuItem");
             this.DuplicateSchemeToolStripMenuItem.Click += new System.EventHandler(this.DuplicateSchemeToolStripMenuItem_Click);
             // 
             // DeleteSchemeToolStripMenuItem
             // 
-            resources.ApplyResources(this.DeleteSchemeToolStripMenuItem, "DeleteSchemeToolStripMenuItem");
             this.DeleteSchemeToolStripMenuItem.Name = "DeleteSchemeToolStripMenuItem";
+            resources.ApplyResources(this.DeleteSchemeToolStripMenuItem, "DeleteSchemeToolStripMenuItem");
             this.DeleteSchemeToolStripMenuItem.Click += new System.EventHandler(this.DeleteSchemeToolStripMenuItem_Click);
             // 
             // imageList
@@ -158,16 +166,13 @@
             this.imageList.Images.SetKeyName(2, "513");
             this.imageList.Images.SetKeyName(3, "514");
             this.imageList.Images.SetKeyName(4, "610");
-            this.imageList.Images.SetKeyName(5, "node");
             // 
-            // UnhiddenCheckBox
+            // HiddenCheckBox
             // 
-            resources.ApplyResources(this.UnhiddenCheckBox, "UnhiddenCheckBox");
-            this.UnhiddenCheckBox.Checked = true;
-            this.UnhiddenCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.UnhiddenCheckBox.Name = "UnhiddenCheckBox";
-            this.UnhiddenCheckBox.UseVisualStyleBackColor = true;
-            this.UnhiddenCheckBox.CheckedChanged += new System.EventHandler(this.UnhiddenCheckBox_CheckedChanged);
+            resources.ApplyResources(this.HiddenCheckBox, "HiddenCheckBox");
+            this.HiddenCheckBox.Name = "HiddenCheckBox";
+            this.HiddenCheckBox.UseVisualStyleBackColor = true;
+            this.HiddenCheckBox.CheckedChanged += new System.EventHandler(this.HiddenCheckBox_CheckedChanged);
             // 
             // PictureBox
             // 
@@ -177,9 +182,9 @@
             // 
             // RangeEditor
             // 
-            resources.ApplyResources(this.RangeEditor, "RangeEditor");
             this.RangeEditor.BackColor = System.Drawing.SystemColors.Window;
             this.RangeEditor.DCMode = false;
+            resources.ApplyResources(this.RangeEditor, "RangeEditor");
             this.RangeEditor.Name = "RangeEditor";
             this.RangeEditor.Node = null;
             this.RangeEditor.Setting = null;
@@ -187,9 +192,9 @@
             // 
             // DropDownEditor
             // 
-            resources.ApplyResources(this.DropDownEditor, "DropDownEditor");
             this.DropDownEditor.BackColor = System.Drawing.SystemColors.Window;
             this.DropDownEditor.DCMode = false;
+            resources.ApplyResources(this.DropDownEditor, "DropDownEditor");
             this.DropDownEditor.Name = "DropDownEditor";
             this.DropDownEditor.Node = null;
             this.DropDownEditor.Setting = null;
@@ -200,39 +205,112 @@
             resources.ApplyResources(this.ShowGuidsCheckBox, "ShowGuidsCheckBox");
             this.ShowGuidsCheckBox.Name = "ShowGuidsCheckBox";
             this.ShowGuidsCheckBox.UseVisualStyleBackColor = true;
-            this.ShowGuidsCheckBox.CheckedChanged += new System.EventHandler(this.ShowGuidsCheckBox_CheckedChanged);
+            this.ShowGuidsCheckBox.Click += new System.EventHandler(this.ShowGuidsCheckBox_CheckedChanged);
             // 
             // ExcelExportButton
             // 
             resources.ApplyResources(this.ExcelExportButton, "ExcelExportButton");
+            this.ExcelExportButton.BackColor = System.Drawing.SystemColors.Control;
             this.ExcelExportButton.Image = global::PowerCFG.Properties.Resources.excel;
             this.ExcelExportButton.Name = "ExcelExportButton";
-            this.ExcelExportButton.UseVisualStyleBackColor = true;
+            this.ExcelExportButton.UseVisualStyleBackColor = false;
             this.ExcelExportButton.Click += new System.EventHandler(this.ExcelExportButton_Click);
             // 
             // PowerSchemeSaveFileDialog
             // 
             this.PowerSchemeSaveFileDialog.DefaultExt = "pow";
-            resources.ApplyResources(this.PowerSchemeSaveFileDialog, "PowerSchemeSaveFileDialog");
             // 
             // PowerSchemeOpenFileDialog
             // 
             this.PowerSchemeOpenFileDialog.DefaultExt = "pow";
-            resources.ApplyResources(this.PowerSchemeOpenFileDialog, "PowerSchemeOpenFileDialog");
+            // 
+            // BatteryReportButton
+            // 
+            resources.ApplyResources(this.BatteryReportButton, "BatteryReportButton");
+            this.BatteryReportButton.BackColor = System.Drawing.SystemColors.Control;
+            this.BatteryReportButton.Image = global::PowerCFG.Properties.Resources.battery_charged;
+            this.BatteryReportButton.Name = "BatteryReportButton";
+            this.BatteryReportButton.UseVisualStyleBackColor = false;
+            this.BatteryReportButton.Click += new System.EventHandler(this.BatteryReportButton_Click);
+            // 
+            // EnergyReportButton
+            // 
+            resources.ApplyResources(this.EnergyReportButton, "EnergyReportButton");
+            this.EnergyReportButton.BackColor = System.Drawing.SystemColors.Control;
+            this.EnergyReportButton.Image = global::PowerCFG.Properties.Resources.Status_battery_charging;
+            this.EnergyReportButton.Name = "EnergyReportButton";
+            this.EnergyReportButton.UseVisualStyleBackColor = false;
+            this.EnergyReportButton.Click += new System.EventHandler(this.EnergyReportButton_Click);
+            // 
+            // EnergyProgressBar
+            // 
+            resources.ApplyResources(this.EnergyProgressBar, "EnergyProgressBar");
+            this.EnergyProgressBar.Maximum = 70;
+            this.EnergyProgressBar.Name = "EnergyProgressBar";
+            this.EnergyProgressBar.Step = 1;
+            this.EnergyProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.EnergyProgressBar.Value = 23;
+            // 
+            // PowerReportButton
+            // 
+            resources.ApplyResources(this.PowerReportButton, "PowerReportButton");
+            this.PowerReportButton.BackColor = System.Drawing.SystemColors.Control;
+            this.PowerReportButton.Image = global::PowerCFG.Properties.Resources.power_icon;
+            this.PowerReportButton.Name = "PowerReportButton";
+            this.PowerReportButton.UseVisualStyleBackColor = false;
+            this.PowerReportButton.Click += new System.EventHandler(this.PowerReportButton_Click);
+            // 
+            // PowerReportBackgroundWorker
+            // 
+            this.PowerReportBackgroundWorker.WorkerReportsProgress = true;
+            this.PowerReportBackgroundWorker.WorkerSupportsCancellation = true;
+            this.PowerReportBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.PowerReportBackgroundWorker_DoWork);
+            this.PowerReportBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.PowerReportBackgroundWorker_ProgressChanged);
+            this.PowerReportBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.PowerReportBackgroundWorker_RunWorkerCompleted);
+            // 
+            // EnergyReportBackgroundWorker
+            // 
+            this.EnergyReportBackgroundWorker.WorkerReportsProgress = true;
+            this.EnergyReportBackgroundWorker.WorkerSupportsCancellation = true;
+            this.EnergyReportBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.EnergyBackgroundWorker_DoWork);
+            this.EnergyReportBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.EnergyBackgroundWorker_ProgressChanged);
+            this.EnergyReportBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.EnergyBackgroundWorker_RunWorkerCompleted);
+            // 
+            // PowerProgressBar
+            // 
+            resources.ApplyResources(this.PowerProgressBar, "PowerProgressBar");
+            this.PowerProgressBar.Maximum = 14;
+            this.PowerProgressBar.Name = "PowerProgressBar";
+            this.PowerProgressBar.Step = 1;
+            this.PowerProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.PowerProgressBar.Value = 8;
+            // 
+            // BatteryBackgroundWorker
+            // 
+            this.BatteryBackgroundWorker.WorkerReportsProgress = true;
+            this.BatteryBackgroundWorker.WorkerSupportsCancellation = true;
+            this.BatteryBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BatteryBackgroundWorker_DoWork);
+            this.BatteryBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BatteryBackgroundWorker_RunWorkerCompleted);
             // 
             // FrmPowerCFG
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.PowerProgressBar);
+            this.Controls.Add(this.EnergyProgressBar);
+            this.Controls.Add(this.EnergyReportButton);
+            this.Controls.Add(this.PowerReportButton);
+            this.Controls.Add(this.BatteryReportButton);
             this.Controls.Add(this.ExcelExportButton);
             this.Controls.Add(this.ShowGuidsCheckBox);
             this.Controls.Add(this.DropDownEditor);
             this.Controls.Add(this.RangeEditor);
             this.Controls.Add(this.PictureBox);
-            this.Controls.Add(this.UnhiddenCheckBox);
+            this.Controls.Add(this.HiddenCheckBox);
             this.Controls.Add(this.tv);
             this.Name = "FrmPowerCFG";
             this.Load += new System.EventHandler(this.FrmPowerCFG_Load);
+            this.Shown += new System.EventHandler(this.FrmPowerCFG_Shown);
             this.contextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.ResumeLayout(false);
@@ -243,7 +321,7 @@
         #endregion
 
         public TreeView tv;
-        public CheckBox UnhiddenCheckBox;
+        public CheckBox HiddenCheckBox;
         public ContextMenuStrip contextMenuStrip;
         public ToolStripMenuItem HiddenToolStripMenuItem;
         public ToolStripMenuItem ShowToolStripMenuItem;
@@ -263,5 +341,13 @@
         public ToolStripMenuItem DuplicateSchemeToolStripMenuItem;
         public SaveFileDialog PowerSchemeSaveFileDialog;
         private OpenFileDialog PowerSchemeOpenFileDialog;
+        private Button BatteryReportButton;
+        private Button EnergyReportButton;
+        private ProgressBar EnergyProgressBar;
+        private Button PowerReportButton;
+        private System.ComponentModel.BackgroundWorker PowerReportBackgroundWorker;
+        private System.ComponentModel.BackgroundWorker EnergyReportBackgroundWorker;
+        private ProgressBar PowerProgressBar;
+        private System.ComponentModel.BackgroundWorker BatteryBackgroundWorker;
     }
 }

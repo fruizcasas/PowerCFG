@@ -121,40 +121,64 @@
   <data name="project" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\project.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="excel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\excel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Default Value" xml:space="preserve">
-    <value>Default Value {0}</value>
-  </data>
-  <data name="On AC Power" xml:space="preserve">
-    <value>On AC Power</value>
-  </data>
-  <data name="On battery" xml:space="preserve">
-    <value>On battery</value>
-  </data>
-  <data name="Paste into Excel" xml:space="preserve">
-    <value>Paste into Excel</value>
-  </data>
-  <data name="Restore to" xml:space="preserve">
-    <value>Restore to {0}</value>
-  </data>
-  <data name="New Scheme Name" xml:space="preserve">
-    <value>New Scheme</value>
-  </data>
-  <data name="Saving Power Scheme" xml:space="preserve">
-    <value>Saving Power Scheme</value>
-  </data>
-  <data name="Admin Reserved" xml:space="preserve">
-    <value>Run the program as Administrator</value>
-  </data>
-  <data name="Do you want to delete the schema" xml:space="preserve">
-    <value>Do you want to delete the schema '{0}'?</value>
+  <data name="Energy Report Message" xml:space="preserve">
+    <value>This report takes at least 60 seconds.</value>
   </data>
   <data name="Do you want to duplicate the schema" xml:space="preserve">
     <value>Do you want to duplicate the schema '{0}'?</value>
   </data>
+  <data name="On battery" xml:space="preserve">
+    <value>On battery</value>
+  </data>
+  <data name="Default Value" xml:space="preserve">
+    <value>Default Value {0}</value>
+  </data>
+  <data name="Admin Reserved" xml:space="preserve">
+    <value>Run the program as Administrator</value>
+  </data>
+  <data name="On AC Power" xml:space="preserve">
+    <value>On AC Power</value>
+  </data>
+  <data name="Paste into Excel" xml:space="preserve">
+    <value>Paste into Excel</value>
+  </data>
+  <data name="Do you want to delete the schema" xml:space="preserve">
+    <value>Do you want to delete the schema '{0}'?</value>
+  </data>
+  <data name="battery-charged" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\battery-charged-icon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Saving Power Scheme" xml:space="preserve">
+    <value>Saving Power Scheme</value>
+  </data>
+  <data name="Restore to" xml:space="preserve">
+    <value>Restore to {0}</value>
+  </data>
+  <data name="Status-battery-charging" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Status-battery-charging-icon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="New Scheme Name" xml:space="preserve">
+    <value>New Scheme</value>
+  </data>
+  <data name="excel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\excel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="RangeFromToIncrement" xml:space="preserve">
     <value>From {0} to {1} step {2}  {3}</value>
+  </data>
+  <data name="power-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\power-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Battery Report" xml:space="preserve">
+    <value>Do you want to cancel the Battery Report?</value>
+  </data>
+  <data name="Energy Report" xml:space="preserve">
+    <value>Do you want to cancel the Energy Report?</value>
+  </data>
+  <data name="Power Report" xml:space="preserve">
+    <value>Do you want to cancel the Power Report?</value>
+  </data>
+  <data name="Report Cancelled" xml:space="preserve">
+    <value>Report Cancelled</value>
   </data>
 </root>

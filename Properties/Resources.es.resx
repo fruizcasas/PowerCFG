@@ -121,20 +121,29 @@
   <data name="project" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\project.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="excel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\excel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Default Value" xml:space="preserve">
-    <value>Por defecto {0}</value>
-  </data>
-  <data name="On AC Power" xml:space="preserve">
-    <value>Con corriente alterna</value>
+  <data name="Do you want to duplicate the schema" xml:space="preserve">
+    <value>¿Desea duplicar el plan de energia '{0}'?</value>
   </data>
   <data name="On battery" xml:space="preserve">
     <value>Con bateria</value>
   </data>
+  <data name="Default Value" xml:space="preserve">
+    <value>Por defecto {0}</value>
+  </data>
+  <data name="Admin Reserved" xml:space="preserve">
+    <value>Ejecute el programa como administrador</value>
+  </data>
+  <data name="On AC Power" xml:space="preserve">
+    <value>Con corriente alterna</value>
+  </data>
   <data name="Paste into Excel" xml:space="preserve">
     <value>Pegar en Excel</value>
+  </data>
+  <data name="Do you want to delete the schema" xml:space="preserve">
+    <value>¿Desea borrar el plan de energia '{0}'?</value>
+  </data>
+  <data name="Saving Power Scheme" xml:space="preserve">
+    <value>Salvando plan de energía</value>
   </data>
   <data name="Restore to" xml:space="preserve">
     <value>Restaurar a {0}</value>
@@ -142,19 +151,19 @@
   <data name="New Scheme Name" xml:space="preserve">
     <value>Plan de Energia nuevo</value>
   </data>
-  <data name="Saving Power Scheme" xml:space="preserve">
-    <value>Salvando plan de energía</value>
-  </data>
-  <data name="Admin Reserved" xml:space="preserve">
-    <value>Ejecute el programa como administrador</value>
-  </data>
-  <data name="Do you want to delete the schema" xml:space="preserve">
-    <value>¿Desea borrar el plan de energia '{0}'?</value>
-  </data>
-  <data name="Do you want to duplicate the schema" xml:space="preserve">
-    <value>¿Desea duplicar el plan de energia '{0}'?</value>
-  </data>
   <data name="RangeFromToIncrement" xml:space="preserve">
     <value>Desde {0} hasta {1} cada {2} {3}</value>
+  </data>
+  <data name="Battery Report" xml:space="preserve">
+    <value>¿Desea cancelar el Informe de batería</value>
+  </data>
+  <data name="Energy Report" xml:space="preserve">
+    <value>¿Desea cancelar el Informe de Eeergía?</value>
+  </data>
+  <data name="Energy Report Message" xml:space="preserve">
+    <value>Este informme tarda al menos 60 segundos.</value>
+  </data>
+  <data name="Power Report" xml:space="preserve">
+    <value>¿Desea cancelar el Informe de alimentación?</value>
   </data>
 </root>

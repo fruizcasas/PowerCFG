@@ -70,6 +70,25 @@ namespace PowerCFG.Properties {
         }
         
         /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap battery_charged {
+            get {
+                object obj = ResourceManager.GetObject("battery-charged", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Do you want to cancel the Battery Report?.
+        /// </summary>
+        public static string Battery_Report {
+            get {
+                return ResourceManager.GetString("Battery Report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Default Value {0}.
         /// </summary>
         public static string Default_Value {
@@ -93,6 +112,24 @@ namespace PowerCFG.Properties {
         public static string Do_you_want_to_duplicate_the_schema {
             get {
                 return ResourceManager.GetString("Do you want to duplicate the schema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Do you want to cancel the Energy Report?.
+        /// </summary>
+        public static string Energy_Report {
+            get {
+                return ResourceManager.GetString("Energy Report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This report takes at least 60 seconds..
+        /// </summary>
+        public static string Energy_Report_Message {
+            get {
+                return ResourceManager.GetString("Energy Report Message", resourceCulture);
             }
         }
         
@@ -143,6 +180,25 @@ namespace PowerCFG.Properties {
         }
         
         /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap power_icon {
+            get {
+                object obj = ResourceManager.GetObject("power-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Do you want to cancel the Power Report?.
+        /// </summary>
+        public static string Power_Report {
+            get {
+                return ResourceManager.GetString("Power Report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
         /// </summary>
         public static System.Drawing.Icon project {
@@ -162,6 +218,15 @@ namespace PowerCFG.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Report Cancelled.
+        /// </summary>
+        public static string Report_Cancelled {
+            get {
+                return ResourceManager.GetString("Report Cancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Restore to {0}.
         /// </summary>
         public static string Restore_to {
@@ -176,6 +241,16 @@ namespace PowerCFG.Properties {
         public static string Saving_Power_Scheme {
             get {
                 return ResourceManager.GetString("Saving Power Scheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Status_battery_charging {
+            get {
+                object obj = ResourceManager.GetObject("Status-battery-charging", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

@@ -15,6 +15,8 @@ using System.Data;
 using System.Xml.Linq;
 using System.Reflection;
 
+
+
 namespace PowerCFG
 {
     public partial class FrmPowerCFG : Form
@@ -31,27 +33,581 @@ namespace PowerCFG
             InitializeComponent();
         }
 
+        // ====================================
+        #region FIELDS
+        // ====================================
+        static IDictionary EnvironmentVariables = Environment.GetEnvironmentVariables();
+
         Guid ActiveSchemeGuid;
+
+        SchemeModel? SelectedScheme = null;
 
         public SchemesModel Schemes = new SchemesModel();
 
         Dictionary<string, IconExtractor> Icons = new Dictionary<string, IconExtractor>();
+
+        string PowerProfName = ExpandVars("@%SystemRoot%\\system32\\powrprof.dll");
+        // ====================================
+        #endregion FIELDS
+        // ====================================
+
+
+        // ====================================
+        #region UTILITIES
+        // ====================================
+
+        private static string ExpandVars(string? value)
+        {
+            value ??= String.Empty;
+            if (value.StartsWith('@'))
+            {
+                value = value.Trim().Replace("@", String.Empty);
+                while (value.Contains('%'))
+                {
+                    int start = value.IndexOf('%');
+                    int next = value.IndexOf('%', start + 1);
+                    if (start >= next) break;
+                    var key = value.Substring(start + 1, next - start - 1);
+                    if (EnvironmentVariables.Contains(key))
+                    {
+                        value = value.Replace($"%{key}%", $"{EnvironmentVariables[key]}");
+                    }
+                }
+            }
+            return value;
+        }
 
         private static unsafe IntPtr GuidToInPtr(Guid g1)
         {
             return (IntPtr)(void*)&g1;
         }
 
+        private void ExpandAllNode(TreeNode? node)
+        {
+            if (node != null)
+            {
+                node.Expand();
+                foreach (TreeNode child in node.Nodes)
+                {
+                    ExpandAllNode(child);
+                }
+            }
+        }
+        private void CollapseNode(TreeNode? node)
+        {
+            if (node != null)
+            {
+                node.Collapse();
+                foreach (TreeNode child in node.Nodes)
+                {
+                    CollapseNode(child);
+                }
+            }
+        }
+
+        // ====================================
+        #endregion UTILITIES
+        // ====================================
+
+        // ====================================
+        #region EVENTS
+        // ====================================
 
         private void FrmPowerCFG_Load(object sender, EventArgs e)
         {
             LoadSchemes();
             LoadNodes(ActiveSchemeGuid);
+            HiddenCheckBox.Visible = IsUserAnAdmin();
+            ShowGuidsCheckBox.Visible = IsUserAnAdmin();
         }
 
+        private void FrmPowerCFG_Shown(object sender, EventArgs e)
+        {
+            if (IsUserAnAdmin()) Text += " (Admin)";
+        }
+
+        private void HiddenCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadSchemes();
+            LoadNodes(ActiveSchemeGuid);
+        }
+
+        private void ShowGuidsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            SettingModel.ShowGuids = !SettingModel.ShowGuids;
+            LoadNodes(ActiveSchemeGuid);
+        }
+
+        private void ExcelExportButton_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(Schemes.ExcelExport(!HiddenCheckBox.Checked));
+            MessageBox.Show(this, Properties.Resources.Paste_into_Excel);
+        }
+
+        // ====================================
+        #endregion EVENTS
+        // ====================================
+
+        // ====================================
+        #region ToolStripMenuItems
+        // ====================================
+        private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            SelectedScheme = null;
+
+            if (tv.SelectedNode is TreeNode node)
+            {
+                CollapseToolStripMenuItem.Visible = true;
+                ExpandToolStripMenuItem.Visible = true;
+
+                if (node.Tag is SchemeModel scheme)
+                {
+                    SelectedScheme = scheme;
+                    HiddenToolStripMenuItem.Visible = false;
+                    ShowToolStripMenuItem.Visible = false;
+                    ActivateSchemeToolStripMenuItem.Visible = (scheme.Id != ActiveSchemeGuid);
+                    CopyGUIDToolStripMenuItem.Visible = SchemeModel.ShowGuids;
+
+                    SaveSchemeToolStripMenuItem.Visible = true;
+                    ImportSchemeToolStripMenuItem.Visible = false;
+                    DuplicateSchemeToolStripMenuItem.Visible = true;
+                    DeleteSchemeToolStripMenuItem.Visible = scheme.Id != ActiveSchemeGuid && !SCHEMES_BY_DEFAULT.Contains(scheme.Id);
+
+                    DuplicateSchemeToolStripMenuItem.Enabled = Schemes.CanCreate;
+                    ActivateSchemeToolStripMenuItem.Enabled = Schemes.CanSetActive;
+                    DeleteSchemeToolStripMenuItem.Enabled = scheme.CanWrite;
+
+                }
+                else if (node.Tag is GroupModel group)
+                {
+                    HiddenToolStripMenuItem.Visible = true;
+                    ShowToolStripMenuItem.Visible = true;
+                    ActivateSchemeToolStripMenuItem.Visible = false;
+                    HiddenToolStripMenuItem.Checked = (group.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_HIDE) == POWER_ATTR.POWER_ATTRIBUTE_HIDE;
+                    ShowToolStripMenuItem.Checked = (group.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC) == POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC;
+                    CopyGUIDToolStripMenuItem.Visible = GroupModel.ShowGuids;
+
+                    SaveSchemeToolStripMenuItem.Visible = false;
+                    ImportSchemeToolStripMenuItem.Visible = false;
+                    DuplicateSchemeToolStripMenuItem.Visible = false;
+                    DeleteSchemeToolStripMenuItem.Visible = false;
+                }
+                else if (node.Tag is SettingModel setting)
+                {
+                    HiddenToolStripMenuItem.Visible = true;
+                    ShowToolStripMenuItem.Visible = true;
+                    ActivateSchemeToolStripMenuItem.Visible = false;
+                    HiddenToolStripMenuItem.Checked = (setting.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_HIDE) == POWER_ATTR.POWER_ATTRIBUTE_HIDE;
+                    ShowToolStripMenuItem.Checked = (setting.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC) == POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC;
+                    CopyGUIDToolStripMenuItem.Visible = SettingModel.ShowGuids;
+
+                    SaveSchemeToolStripMenuItem.Visible = false;
+                    ImportSchemeToolStripMenuItem.Visible = false;
+                    DuplicateSchemeToolStripMenuItem.Visible = false;
+                    DeleteSchemeToolStripMenuItem.Visible = false;
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+            else
+            {
+                CollapseToolStripMenuItem.Visible = false;
+                ExpandToolStripMenuItem.Visible = false;
+                HiddenToolStripMenuItem.Visible = false;
+                ShowToolStripMenuItem.Visible = false;
+                ActivateSchemeToolStripMenuItem.Visible = false;
+                CopyGUIDToolStripMenuItem.Visible = false;
+
+                SaveSchemeToolStripMenuItem.Visible = false;
+                ImportSchemeToolStripMenuItem.Visible = Schemes.CanCreate;
+                DuplicateSchemeToolStripMenuItem.Visible = false;
+                DeleteSchemeToolStripMenuItem.Visible = false;
+            }
 
 
-        string PowerProfName = ExpandVars("@%SystemRoot%\\system32\\powrprof.dll");
+
+        }
+        private void CopyGUIDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tv.SelectedNode?.Tag is SchemeModel scheme)
+            {
+                Clipboard.SetText($"{SchemeModel.NameForGuid(scheme.Id)} {scheme.Id}");
+            }
+            else if (tv.SelectedNode?.Tag is GroupModel group)
+            {
+                Clipboard.SetText($"{GroupModel.NameForGuid(group.Id)} {group.Id}");
+            }
+            else if (tv.SelectedNode?.Tag is SettingModel setting)
+            {
+                Clipboard.SetText($"{SettingModel.NameForGuid(setting.Id)} {setting.Id}");
+            }
+        }
+        private void ActivateSchemeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (SelectedScheme != null)
+            {
+                Win32Error err = PowerSetActiveScheme(default, SelectedScheme.Id);
+                if (err.Failed)
+                {
+                    System.Windows.Forms.MessageBox.Show(this, $"{err}", $"PowerSetActiveScheme({SelectedScheme.Name})");
+                }
+                else
+                {
+                    ActiveSchemeGuid = SelectedScheme.Id;
+                    Font bold = new Font(tv.Font, FontStyle.Bold);
+                    foreach (TreeNode node in tv.Nodes)
+                    {
+                        if (node?.Tag is SchemeModel scheme)
+                        {
+                            if (scheme.Id == ActiveSchemeGuid)
+                            {
+                                node.NodeFont = bold;
+                            }
+                            else
+                            {
+                                node.NodeFont = tv.Font;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+        private void HiddenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tv.SelectedNode?.Tag is GroupModel group)
+            {
+                group.PowerAttr ^= POWER_ATTR.POWER_ATTRIBUTE_HIDE;
+                Win32Error err = PowerWriteSettingAttributes(group.Id, Guid.Empty, group.PowerAttr);
+                if (err.Failed)
+                {
+                    System.Windows.Forms.MessageBox.Show(this, $"{err}", $"PowerWriteSettingAttributes({group.Name},{group.PowerAttr})");
+                }
+            }
+            else if (tv.SelectedNode?.Tag is SettingModel setting)
+            {
+                setting.PowerAttr ^= POWER_ATTR.POWER_ATTRIBUTE_HIDE;
+                Win32Error err = PowerWriteSettingAttributes(setting.SubgroupId, setting.Id, setting.PowerAttr);
+                if (err.Failed)
+                {
+                    System.Windows.Forms.MessageBox.Show(this, $"{err}", $"PowerWriteSettingAttributes({setting.Name},{setting.PowerAttr})");
+                }
+
+                Font bold = new Font(tv.Font, FontStyle.Bold);
+                Font italic = new Font(tv.Font, FontStyle.Italic);
+                if ((setting.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_HIDE) == POWER_ATTR.POWER_ATTRIBUTE_HIDE)
+                {
+                    tv.SelectedNode.NodeFont = italic;
+                    tv.SelectedNode.ForeColor = SystemColors.GrayText;
+                }
+                else if ((setting.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC) == POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC)
+                {
+                    tv.SelectedNode.NodeFont = bold;
+                    tv.SelectedNode.ForeColor = SystemColors.ControlText;
+                    tv.SelectedNode.Parent.NodeFont = bold;
+                    tv.SelectedNode.Parent.ForeColor = SystemColors.ControlText;
+                }
+                else
+                {
+                    tv.SelectedNode.NodeFont = tv.Font;
+                    tv.SelectedNode.ForeColor = SystemColors.ControlText;
+                }
+            }
+        }
+        private void ShowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tv.SelectedNode?.Tag is GroupModel group)
+            {
+                group.PowerAttr ^= POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC;
+                Win32Error err = PowerWriteSettingAttributes(group.Id, Guid.Empty, group.PowerAttr);
+                if (err.Failed)
+                {
+                    System.Windows.Forms.MessageBox.Show(this, $"{err}", $"PowerWriteSettingAttributes({group.Name},{group.PowerAttr})");
+                }
+            }
+            else if (tv.SelectedNode?.Tag is SettingModel setting)
+            {
+                setting.PowerAttr ^= POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC;
+                Win32Error err = PowerWriteSettingAttributes(setting.SubgroupId, setting.Id, setting.PowerAttr);
+                if (err.Failed)
+                {
+                    System.Windows.Forms.MessageBox.Show(this, $"{err}", $"PowerWriteSettingAttributes({setting.Name},{setting.PowerAttr})");
+                }
+
+                Font bold = new Font(tv.Font, FontStyle.Bold);
+                Font italic = new Font(tv.Font, FontStyle.Italic);
+                if ((setting.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_HIDE) == POWER_ATTR.POWER_ATTRIBUTE_HIDE)
+                {
+                    tv.SelectedNode.NodeFont = italic;
+                    tv.SelectedNode.ForeColor = SystemColors.GrayText;
+                }
+                else if ((setting.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC) == POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC)
+                {
+                    tv.SelectedNode.NodeFont = bold;
+                    tv.SelectedNode.ForeColor = SystemColors.ControlText;
+                    tv.SelectedNode.Parent.NodeFont = bold;
+                    tv.SelectedNode.Parent.ForeColor = SystemColors.ControlText;
+                }
+                else
+                {
+                    tv.SelectedNode.NodeFont = tv.Font;
+                    tv.SelectedNode.ForeColor = SystemColors.ControlText;
+                }
+            }
+        }
+        private void ExpandToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tv.SelectedNode is TreeNode node)
+            {
+                node.ExpandAll();
+                tv.SelectedNode = node;
+                node.EnsureVisible();
+            }
+        }
+        private void CollapseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tv.SelectedNode is TreeNode node)
+            {
+                CollapseNode(node);
+            }
+        }
+        private void SaveSchemeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tv.SelectedNode is TreeNode node && node.Tag is SchemeModel scheme)
+            {
+                if (!IsUserAnAdmin())
+                {
+                    MessageBox.Show(this, Properties.Resources.Admin_Reserved, scheme.Name, buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    PowerSchemeSaveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    PowerSchemeSaveFileDialog.FileName = $"{scheme.Name}.pow";
+                    if (PowerSchemeSaveFileDialog.ShowDialog(this) == DialogResult.OK)
+                    {
+                        Process process = new Process();
+
+
+                        process.StartInfo.FileName = ExpandVars("@%SystemRoot%\\system32\\powercfg.exe");
+                        process.StartInfo.ArgumentList.Clear();
+                        process.StartInfo.ArgumentList.Add("/export");
+                        process.StartInfo.ArgumentList.Add(PowerSchemeSaveFileDialog.FileName);
+                        process.StartInfo.ArgumentList.Add($"{scheme.Id}");
+                        process.StartInfo.RedirectStandardError = true;
+                        process.StartInfo.StandardErrorEncoding = Encoding.Latin1;
+
+                        if (process.Start())
+                        {
+                            if (!process.WaitForExit(4000))
+                            {
+                                process.Kill(true);
+                            }
+                            if (process.ExitCode != 0)
+                            {
+                                string errorOutput = process.StandardError.ReadToEnd();
+                                MessageBox.Show(this, errorOutput, Properties.Resources.Saving_Power_Scheme, buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        private void ImportSchemeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PowerSchemeOpenFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            PowerSchemeOpenFileDialog.FileName = $"Scheme.pow";
+            if (PowerSchemeOpenFileDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                Win32Error err = PowerImportPowerScheme(default, PowerSchemeOpenFileDialog.FileName, out SafeLocalHandle destinationSchemeGuid);
+                if (err.Failed)
+                {
+                    MessageBox.Show(this, $"{err}", $"PowerImportPowerScheme({PowerSchemeOpenFileDialog.FileName},{Guid.Empty})");
+                }
+                else
+                {
+                    Guid newGuid = destinationSchemeGuid.ToStructure<Guid>();
+                    err = PowerWriteFriendlyName(newGuid, null, null, Properties.Resources.New_Scheme_Name); ;
+                    if (err.Failed)
+                    {
+                        MessageBox.Show(this, $"{err}", $"PowerWriteFriendlyName({PowerSchemeOpenFileDialog.FileName},{newGuid}");
+                    }
+                    Cursor = Cursors.WaitCursor;
+                    LoadScheme(newGuid, Icons[PowerProfName][610]);
+                    LoadNodes(ActiveSchemeGuid);
+                    Cursor = Cursors.Default;
+                }
+            }
+
+        }
+        private void DeleteSchemeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tv.SelectedNode is TreeNode node && node.Tag is SchemeModel scheme)
+            {
+                if (scheme.Id != ActiveSchemeGuid && !SCHEMES_BY_DEFAULT.Contains(scheme.Id))
+                {
+                    if (MessageBox.Show(this, String.Format(Properties.Resources.Do_you_want_to_delete_the_schema, scheme.Name),
+                                        scheme.Name,
+                                        icon: MessageBoxIcon.Warning,
+                                        buttons: MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        Win32Error err = PowerDeleteScheme(default, scheme.Id);
+                        if (err.Failed)
+                        {
+                            MessageBox.Show(this, $"{err}", $"PowerDeleteScheme({scheme.Name}");
+                        }
+                        else
+                        {
+                            Cursor = Cursors.WaitCursor;
+                            Schemes.Remove(scheme.Id);
+                            LoadNodes(ActiveSchemeGuid);
+                            Cursor = Cursors.Default;
+                        }
+                    }
+                }
+            }
+        }
+        private void DuplicateSchemeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tv.SelectedNode is TreeNode node && node.Tag is SchemeModel scheme)
+            {
+                if (MessageBox.Show(this, String.Format(Properties.Resources.Do_you_want_to_duplicate_the_schema, scheme.Name),
+                                         scheme.Name,
+                                         icon: MessageBoxIcon.Warning,
+                                         buttons: MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    Win32Error err = PowerDuplicateScheme(default, scheme.Id, out SafeLocalHandle destinationSchemeGuid);
+                    if (err.Failed)
+                    {
+                        MessageBox.Show(this, $"{err}", $"PowerDuplicateScheme({scheme.Name})");
+                    }
+                    else
+                    {
+                        Guid newGuid = destinationSchemeGuid.ToStructure<Guid>();
+                        int n = 1;
+                        while (Schemes.Values.FirstOrDefault(p => p.Name == $"{scheme.Name} ({n})") is SchemeModel)
+                        {
+                            n++;
+                        }
+                        err = PowerWriteFriendlyName(newGuid, null, null, $"{scheme.Name} ({n})");
+                        if (err.Failed)
+                        {
+                            MessageBox.Show(this, $"{err}", $"PowerWriteFriendlyName({scheme.Name} ({n}),{newGuid}");
+                        }
+                        Cursor = Cursors.WaitCursor;
+                        LoadScheme(newGuid, Icons[PowerProfName][610]);
+                        LoadNodes(ActiveSchemeGuid);
+                        Cursor = Cursors.Default;
+                    }
+                }
+            }
+        }
+        // ====================================
+        #endregion ToolStripMenuItems
+        // ====================================
+
+        // ====================================
+        #region TreeView Events
+        // ====================================
+        private void tv_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            Icon icon = null;
+            //if (tv.SelectedImageKey != e.Node?.ImageKey)
+            //{
+            //    tv.SelectedImageKey = e.Node?.ImageKey;
+            //}
+            if (e.Node?.Tag is SettingModel setting)
+            {
+                icon = setting.Icon;
+            }
+            else if (e.Node?.Tag is SchemeModel scheme)
+            {
+                icon = scheme.Icon;
+            }
+            if (e.Node?.Tag is GroupModel group)
+            {
+                icon = group.Icon;
+            }
+            if (icon != null)
+            {
+                PictureBox.Image = Bitmap.FromHicon(icon.Handle);
+            }
+            else
+            {
+                PictureBox.Image = null;
+            }
+        }
+        private void tv_DoubleClick(object sender, EventArgs e)
+        {
+            if (tv.SelectedNode is TreeNode node && node.Tag is SettingValueModel settingValue)
+            {
+                if ((((settingValue.Setting.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_HIDE) != POWER_ATTR.POWER_ATTRIBUTE_HIDE) &&
+                    ((settingValue.Setting.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC) == POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC)) ||
+                    ((Control.ModifierKeys & Keys.Control) == Keys.Control))
+                {
+                    if (settingValue.Setting.IsRange)
+                    {
+                        if ((settingValue.Setting.CanWriteDC && settingValue.DCMode) ||
+                            (settingValue.Setting.CanWriteAC && !settingValue.DCMode) ||
+                            ((Control.ModifierKeys & Keys.Control) == Keys.Control))
+
+                        {
+                            RangeEditor.Edit(node, settingValue.Setting, settingValue.DCMode);
+                        }
+                    }
+                    else
+                    {
+                        if ((settingValue.Setting.CanWriteDC && settingValue.DCMode) ||
+                            (settingValue.Setting.CanWriteAC && !settingValue.DCMode) ||
+                            ((Control.ModifierKeys & Keys.Control) == Keys.Control))
+
+                        {
+                            DropDownEditor.Edit(node, settingValue.Setting, settingValue.DCMode);
+                        }
+                    }
+                }
+            }
+        }
+        private void tv_MouseClick(object sender, MouseEventArgs e)
+        {
+            DropDownEditor.Visible = false;
+            RangeEditor.Visible = false;
+        }
+        private void tv_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (tv.HitTest(e.Location) is TreeViewHitTestInfo testInfo)
+            {
+                tv.SelectedNode = testInfo.Node;
+            }
+        }
+        private void tv_BeforeLabelEdit(object sender, NodeLabelEditEventArgs e)
+        {
+            e.CancelEdit = true;
+            if (e.Node.Tag is SchemeModel scheme && !SCHEMES_BY_DEFAULT.Contains(scheme.Id) && scheme.CanWrite && IsUserAnAdmin())
+            {
+                e.CancelEdit = false;
+            }
+        }
+        private void tv_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
+        {
+            e.CancelEdit = true;
+            if (e.Node.Tag is SchemeModel scheme && !string.IsNullOrWhiteSpace(e.Label))
+            {
+                Win32Error err = PowerWriteFriendlyName(scheme.Id, null, null, e.Label.Trim());
+                if (err.Succeeded)
+                {
+                    scheme.Name = PowerReadFriendlyName(scheme.Id);
+                    e.Node.Text = scheme.Name;
+                    e.CancelEdit = true;
+                }
+            }
+        }
+
+        // ====================================
+        #endregion TreeView Events
+        // ====================================
+
 
         private void LoadSchemes()
         {
@@ -106,7 +662,6 @@ namespace PowerCFG
             Cursor = Cursors.Default;
 
         }
-
 
         private void LoadSubgroup(SchemeModel Scheme, Guid subgroupId)
         {
@@ -417,29 +972,6 @@ namespace PowerCFG
             return err;
         }
 
-        static IDictionary EnvironmentVariables = Environment.GetEnvironmentVariables();
-
-        private static string ExpandVars(string? value)
-        {
-            value ??= String.Empty;
-            if (value.StartsWith('@'))
-            {
-                value = value.Trim().Replace("@", String.Empty);
-                while (value.Contains('%'))
-                {
-                    int start = value.IndexOf('%');
-                    int next = value.IndexOf('%', start + 1);
-                    if (start >= next) break;
-                    var key = value.Substring(start + 1, next - start - 1);
-                    if (EnvironmentVariables.Contains(key))
-                    {
-                        value = value.Replace($"%{key}%", $"{EnvironmentVariables[key]}");
-                    }
-                }
-            }
-            return value;
-        }
-
 
         private void LoadNodes(Guid activeSchemeGuid)
         {
@@ -453,6 +985,7 @@ namespace PowerCFG
                 sNode.ToolTipText = s.ToolTip;
                 sNode.Tag = s;
                 sNode.ImageKey = s.KeyIcon;
+                sNode.SelectedImageKey = s.KeyIcon;
                 if (s.Id == activeSchemeGuid)
                 {
                     sNode.NodeFont = bold;
@@ -460,7 +993,7 @@ namespace PowerCFG
 
                 foreach (var g in s.Groups.Values)
                 {
-                    if (g.Settings.Values.Any(a => !UnhiddenCheckBox.Checked || (a.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC) == POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC))
+                    if (g.Settings.Values.Any(a => HiddenCheckBox.Checked || (a.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC) == POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC))
                     {
                         if ((g.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_HIDE) != POWER_ATTR.POWER_ATTRIBUTE_HIDE)
                         {
@@ -468,6 +1001,7 @@ namespace PowerCFG
                             gNode.ToolTipText = g.ToolTip;
                             gNode.Tag = g;
                             gNode.ImageKey = g.KeyIcon;
+                            gNode.SelectedImageKey = g.KeyIcon;
                             if ((g.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_HIDE) == POWER_ATTR.POWER_ATTRIBUTE_HIDE)
                             {
                                 gNode.NodeFont = italic;
@@ -480,12 +1014,13 @@ namespace PowerCFG
                             }
                             foreach (var a in g.Settings.Values)
                             {
-                                if (!UnhiddenCheckBox.Checked || (a.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC) == POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC)
+                                if (HiddenCheckBox.Checked || (a.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC) == POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC)
                                 {
                                     TreeNode aNode = gNode.Nodes.Add(a.Id.ToString(), a.ToString());
                                     aNode.ToolTipText = a.ToolTip;
                                     aNode.Tag = a;
                                     aNode.ImageKey = a.KeyIcon;
+                                    aNode.SelectedImageKey = a.KeyIcon;
                                     if ((a.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_HIDE) == POWER_ATTR.POWER_ATTRIBUTE_HIDE)
                                     {
                                         aNode.NodeFont = italic;
@@ -519,254 +1054,9 @@ namespace PowerCFG
 
         }
 
-        private void UnhiddenCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            LoadSchemes();
-            LoadNodes(ActiveSchemeGuid);
-        }
 
 
-        private void CopyGUIDToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (tv.SelectedNode?.Tag is SchemeModel scheme)
-            {
-                Clipboard.SetText($"{SchemeModel.NameForGuid(scheme.Id)} {scheme.Id}");
-            }
-            else if (tv.SelectedNode?.Tag is GroupModel group)
-            {
-                Clipboard.SetText($"{GroupModel.NameForGuid(group.Id)} {group.Id}");
-            }
-            else if (tv.SelectedNode?.Tag is SettingModel setting)
-            {
-                Clipboard.SetText($"{SettingModel.NameForGuid(setting.Id)} {setting.Id}");
-            }
-        }
-
-        private void ActivateSchemeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (SelectedScheme != null)
-            {
-
-                Win32Error err = PowerSetActiveScheme(default, SelectedScheme.Id);
-                if (err.Failed)
-                {
-                    System.Windows.Forms.MessageBox.Show(this, $"{err}", $"PowerSetActiveScheme({SelectedScheme.Name})");
-                }
-                else
-                {
-                    ActiveSchemeGuid = SelectedScheme.Id;
-                    Font bold = new Font(tv.Font, FontStyle.Bold);
-                    foreach (TreeNode node in tv.Nodes)
-                    {
-                        if (node?.Tag is SchemeModel scheme)
-                        {
-                            if (scheme.Id == ActiveSchemeGuid)
-                            {
-                                node.NodeFont = bold;
-                            }
-                            else
-                            {
-                                node.NodeFont = tv.Font;
-                            }
-                        }
-                    }
-                }
-            }
-
-        }
-
-        private void HiddenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (tv.SelectedNode?.Tag is GroupModel group)
-            {
-                group.PowerAttr ^= POWER_ATTR.POWER_ATTRIBUTE_HIDE;
-                Win32Error err = PowerWriteSettingAttributes(group.Id, Guid.Empty, group.PowerAttr);
-                if (err.Failed)
-                {
-                    System.Windows.Forms.MessageBox.Show(this, $"{err}", $"PowerWriteSettingAttributes({group.Name},{group.PowerAttr})");
-                }
-            }
-            else if (tv.SelectedNode?.Tag is SettingModel setting)
-            {
-                setting.PowerAttr ^= POWER_ATTR.POWER_ATTRIBUTE_HIDE;
-                Win32Error err = PowerWriteSettingAttributes(setting.SubgroupId, setting.Id, setting.PowerAttr);
-                if (err.Failed)
-                {
-                    System.Windows.Forms.MessageBox.Show(this, $"{err}", $"PowerWriteSettingAttributes({setting.Name},{setting.PowerAttr})");
-                }
-
-                Font bold = new Font(tv.Font, FontStyle.Bold);
-                Font italic = new Font(tv.Font, FontStyle.Italic);
-                if ((setting.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_HIDE) == POWER_ATTR.POWER_ATTRIBUTE_HIDE)
-                {
-                    tv.SelectedNode.NodeFont = italic;
-                    tv.SelectedNode.ForeColor = SystemColors.GrayText;
-                }
-                else if ((setting.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC) == POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC)
-                {
-                    tv.SelectedNode.NodeFont = bold;
-                    tv.SelectedNode.ForeColor = SystemColors.ControlText;
-                    tv.SelectedNode.Parent.NodeFont = bold;
-                    tv.SelectedNode.Parent.ForeColor = SystemColors.ControlText;
-                }
-                else
-                {
-                    tv.SelectedNode.NodeFont = tv.Font;
-                    tv.SelectedNode.ForeColor = SystemColors.ControlText;
-                }
-            }
-        }
-
-        private void ShowToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (tv.SelectedNode?.Tag is GroupModel group)
-            {
-                group.PowerAttr ^= POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC;
-                Win32Error err = PowerWriteSettingAttributes(group.Id, Guid.Empty, group.PowerAttr);
-                if (err.Failed)
-                {
-                    System.Windows.Forms.MessageBox.Show(this, $"{err}", $"PowerWriteSettingAttributes({group.Name},{group.PowerAttr})");
-                }
-            }
-            else if (tv.SelectedNode?.Tag is SettingModel setting)
-            {
-                setting.PowerAttr ^= POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC;
-                Win32Error err = PowerWriteSettingAttributes(setting.SubgroupId, setting.Id, setting.PowerAttr);
-                if (err.Failed)
-                {
-                    System.Windows.Forms.MessageBox.Show(this, $"{err}", $"PowerWriteSettingAttributes({setting.Name},{setting.PowerAttr})");
-                }
-
-                Font bold = new Font(tv.Font, FontStyle.Bold);
-                Font italic = new Font(tv.Font, FontStyle.Italic);
-                if ((setting.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_HIDE) == POWER_ATTR.POWER_ATTRIBUTE_HIDE)
-                {
-                    tv.SelectedNode.NodeFont = italic;
-                    tv.SelectedNode.ForeColor = SystemColors.GrayText;
-                }
-                else if ((setting.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC) == POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC)
-                {
-                    tv.SelectedNode.NodeFont = bold;
-                    tv.SelectedNode.ForeColor = SystemColors.ControlText;
-                    tv.SelectedNode.Parent.NodeFont = bold;
-                    tv.SelectedNode.Parent.ForeColor = SystemColors.ControlText;
-                }
-                else
-                {
-                    tv.SelectedNode.NodeFont = tv.Font;
-                    tv.SelectedNode.ForeColor = SystemColors.ControlText;
-                }
-            }
-        }
-
-        private void tv_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            Icon icon = null;
-            //if (tv.SelectedImageKey != e.Node?.ImageKey)
-            //{
-            //    tv.SelectedImageKey = e.Node?.ImageKey;
-            //}
-            if (e.Node?.Tag is SettingModel setting)
-            {
-                icon = setting.Icon;
-            }
-            else if (e.Node?.Tag is SchemeModel scheme)
-            {
-                icon = scheme.Icon;
-            }
-            if (e.Node?.Tag is GroupModel group)
-            {
-                icon = group.Icon;
-            }
-            if (icon != null)
-            {
-                PictureBox.Image = Bitmap.FromHicon(icon.Handle);
-            }
-            else
-            {
-                PictureBox.Image = null;
-            }
-        }
-
-        private void tv_DoubleClick(object sender, EventArgs e)
-        {
-            if (tv.SelectedNode is TreeNode node && node.Tag is SettingValueModel settingValue)
-            {
-                if ((((settingValue.Setting.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_HIDE) != POWER_ATTR.POWER_ATTRIBUTE_HIDE) &&
-                    ((settingValue.Setting.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC) == POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC)) ||
-                    ((Control.ModifierKeys & Keys.Control) == Keys.Control))
-                {
-                    if (settingValue.Setting.IsRange)
-                    {
-                        if ((settingValue.Setting.CanWriteDC && settingValue.DCMode) ||
-                            (settingValue.Setting.CanWriteAC && !settingValue.DCMode) ||
-                            ((Control.ModifierKeys & Keys.Control) == Keys.Control))
-
-                        {
-                            RangeEditor.Edit(node, settingValue.Setting, settingValue.DCMode);
-                        }
-                    }
-                    else
-                    {
-                        if ((settingValue.Setting.CanWriteDC && settingValue.DCMode) ||
-                            (settingValue.Setting.CanWriteAC && !settingValue.DCMode) ||
-                            ((Control.ModifierKeys & Keys.Control) == Keys.Control))
-
-                        {
-                            DropDownEditor.Edit(node, settingValue.Setting, settingValue.DCMode);
-                        }
-                    }
-                }
-            }
-        }
-
-        private void ExpandAllNode(TreeNode? node)
-        {
-            if (node != null)
-            {
-                node.Expand();
-                foreach (TreeNode child in node.Nodes)
-                {
-                    ExpandAllNode(child);
-                }
-            }
-        }
-
-        private void ExpandToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (tv.SelectedNode is TreeNode node)
-            {
-                node.ExpandAll();
-                tv.SelectedNode = node;
-                node.EnsureVisible();
-            }
-        }
-
-        private void CollapseNode(TreeNode? node)
-        {
-            if (node != null)
-            {
-                node.Collapse();
-                foreach (TreeNode child in node.Nodes)
-                {
-                    CollapseNode(child);
-                }
-            }
-        }
-
-        private void CollapseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (tv.SelectedNode is TreeNode node)
-            {
-                CollapseNode(node);
-            }
-        }
-
-        private void tv_MouseClick(object sender, MouseEventArgs e)
-        {
-            DropDownEditor.Visible = false;
-            RangeEditor.Visible = false;
-        }
+        #region EDITORS Events
 
         private void RangeEditor_RestoreDefaultClick(object sender, SettingArgs e)
         {
@@ -870,290 +1160,332 @@ namespace PowerCFG
             }
         }
 
-        private void tv_MouseDown(object sender, MouseEventArgs e)
+        #endregion EDITORS Events
+
+
+        // ====================================
+        #region BATTERY REPORT
+        // ====================================
+
+        private void BatteryReportButton_Click(object sender, EventArgs e)
         {
-            if (tv.HitTest(e.Location) is TreeViewHitTestInfo testInfo)
+            if (!BatteryBackgroundWorker.IsBusy)
             {
-                tv.SelectedNode = testInfo.Node;
-            }
-        }
-
-        private void ShowGuidsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            SettingModel.ShowGuids = !SettingModel.ShowGuids;
-            LoadNodes(ActiveSchemeGuid);
-        }
-
-        private void ExcelExportButton_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(Schemes.ExcelExport(UnhiddenCheckBox.Checked));
-            MessageBox.Show(this, Properties.Resources.Paste_into_Excel);
-        }
-
-        private void tv_BeforeLabelEdit(object sender, NodeLabelEditEventArgs e)
-        {
-            e.CancelEdit = true;
-            if (e.Node.Tag is SchemeModel scheme && !SCHEMES_BY_DEFAULT.Contains(scheme.Id) && scheme.CanWrite)
-            {
-                e.CancelEdit = false;
-            }
-        }
-
-        private void tv_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
-        {
-            e.CancelEdit = true;
-            if (e.Node.Tag is SchemeModel scheme && !string.IsNullOrWhiteSpace(e.Label))
-            {
-                Win32Error err = PowerWriteFriendlyName(scheme.Id, null, null, e.Label.Trim());
-                if (err.Succeeded)
-                {
-                    scheme.Name = PowerReadFriendlyName(scheme.Id);
-                    e.Node.Text = scheme.Name;
-                    e.CancelEdit = true;
-                }
-            }
-        }
-
-        private void SaveSchemeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (tv.SelectedNode is TreeNode node && node.Tag is SchemeModel scheme)
-            {
-                if (!IsUserAnAdmin())
-                {
-                    MessageBox.Show(this, Properties.Resources.Admin_Reserved, scheme.Name, buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Warning);
-                }
-                else
-                {
-                    PowerSchemeSaveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    PowerSchemeSaveFileDialog.FileName = $"{scheme.Name}.pow";
-                    if (PowerSchemeSaveFileDialog.ShowDialog(this) == DialogResult.OK)
-                    {
-                        Process process = new Process();
-
-
-                        process.StartInfo.FileName = ExpandVars("@%SystemRoot%\\system32\\powercfg.exe");
-                        process.StartInfo.ArgumentList.Clear();
-                        process.StartInfo.ArgumentList.Add("/export");
-                        process.StartInfo.ArgumentList.Add(PowerSchemeSaveFileDialog.FileName);
-                        process.StartInfo.ArgumentList.Add($"{scheme.Id}");
-                        process.StartInfo.RedirectStandardError = true;
-                        process.StartInfo.StandardErrorEncoding = Encoding.Latin1;
-
-                        if (process.Start())
-                        {
-                            if (!process.WaitForExit(4000))
-                            {
-                                process.Kill(true);
-                            }
-                            if (process.ExitCode != 0)
-                            {
-                                string errorOutput = process.StandardError.ReadToEnd();
-                                MessageBox.Show(this, errorOutput, Properties.Resources.Saving_Power_Scheme, buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-
-        private void ImportSchemeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PowerSchemeOpenFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            PowerSchemeOpenFileDialog.FileName = $"Scheme.pow";
-            if (PowerSchemeOpenFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                Win32Error err = PowerImportPowerScheme(default, PowerSchemeOpenFileDialog.FileName, out SafeLocalHandle destinationSchemeGuid);
-                if (err.Failed)
-                {
-                    MessageBox.Show(this, $"{err}", $"PowerImportPowerScheme({PowerSchemeOpenFileDialog.FileName},{Guid.Empty})");
-                }
-                else
-                {
-                    Guid newGuid = destinationSchemeGuid.ToStructure<Guid>();
-                    err = PowerWriteFriendlyName(newGuid, null, null, Properties.Resources.New_Scheme_Name); ;
-                    if (err.Failed)
-                    {
-                        MessageBox.Show(this, $"{err}", $"PowerWriteFriendlyName({PowerSchemeOpenFileDialog.FileName},{newGuid}");
-                    }
-                    Cursor = Cursors.WaitCursor;
-                    LoadScheme(newGuid, Icons[PowerProfName][610]);
-                    LoadNodes(ActiveSchemeGuid);
-                    Cursor = Cursors.Default;
-                }
-            }
-
-        }
-
-        private void DeleteSchemeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (tv.SelectedNode is TreeNode node && node.Tag is SchemeModel scheme)
-            {
-                if (scheme.Id != ActiveSchemeGuid && !SCHEMES_BY_DEFAULT.Contains(scheme.Id))
-                {
-                    if (MessageBox.Show(this, String.Format(Properties.Resources.Do_you_want_to_delete_the_schema, scheme.Name),
-                                        scheme.Name,
-                                        icon: MessageBoxIcon.Warning,
-                                        buttons: MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    {
-                        Win32Error err = PowerDeleteScheme(default, scheme.Id);
-                        if (err.Failed)
-                        {
-                            MessageBox.Show(this, $"{err}", $"PowerDeleteScheme({scheme.Name}");
-                        }
-                        else
-                        {
-                            Cursor = Cursors.WaitCursor;
-                            Schemes.Remove(scheme.Id);
-                            LoadNodes(ActiveSchemeGuid);
-                            Cursor = Cursors.Default;
-                        }
-                    }
-                }
-            }
-        }
-
-        private void DuplicateSchemeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (tv.SelectedNode is TreeNode node && node.Tag is SchemeModel scheme)
-            {
-                if (MessageBox.Show(this, String.Format(Properties.Resources.Do_you_want_to_duplicate_the_schema, scheme.Name),
-                                         scheme.Name,
-                                         icon: MessageBoxIcon.Warning,
-                                         buttons: MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    Win32Error err = PowerDuplicateScheme(default, scheme.Id, out SafeLocalHandle destinationSchemeGuid);
-                    if (err.Failed)
-                    {
-                        MessageBox.Show(this, $"{err}", $"PowerDuplicateScheme({scheme.Name})");
-                    }
-                    else
-                    {
-                        Guid newGuid = destinationSchemeGuid.ToStructure<Guid>();
-                        int n = 1;
-                        while (Schemes.Values.FirstOrDefault(p => p.Name == $"{scheme.Name} ({n})") is SchemeModel)
-                        {
-                            n++;
-                        }
-                        err = PowerWriteFriendlyName(newGuid, null, null, $"{scheme.Name} ({n})");
-                        if (err.Failed)
-                        {
-                            MessageBox.Show(this, $"{err}", $"PowerWriteFriendlyName({scheme.Name} ({n}),{newGuid}");
-                        }
-                        Cursor = Cursors.WaitCursor;
-                        LoadScheme(newGuid, Icons[PowerProfName][610]);
-                        LoadNodes(ActiveSchemeGuid);
-                        Cursor = Cursors.Default;
-                    }
-                }
-            }
-        }
-
-
-        SchemeModel? SelectedScheme = null;
-
-        private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            SelectedScheme = null;
-
-            if (tv.SelectedNode is TreeNode node)
-            {
-                CollapseToolStripMenuItem.Visible = true;
-                ExpandToolStripMenuItem.Visible = true;
-
-                if (node.Tag is SchemeModel scheme)
-                {
-                    SelectedScheme = scheme;
-                    HiddenToolStripMenuItem.Visible = false;
-                    ShowToolStripMenuItem.Visible = false;
-                    ActivateSchemeToolStripMenuItem.Visible = (scheme.Id != ActiveSchemeGuid) && Schemes.CanSetActive;
-                    CopyGUIDToolStripMenuItem.Visible = SchemeModel.ShowGuids;
-
-                    SaveSchemeToolStripMenuItem.Visible = true;
-                    ImportSchemeToolStripMenuItem.Visible = false;
-                    DuplicateSchemeToolStripMenuItem.Visible = Schemes.CanCreate;
-                    DeleteSchemeToolStripMenuItem.Visible =
-                        scheme.CanWrite &&
-                        scheme.Id != ActiveSchemeGuid && !SCHEMES_BY_DEFAULT.Contains(scheme.Id);
-
-                }
-                else if (node.Tag is GroupModel group)
-                {
-                    HiddenToolStripMenuItem.Visible = true;
-                    ShowToolStripMenuItem.Visible = true;
-                    ActivateSchemeToolStripMenuItem.Visible = false;
-                    HiddenToolStripMenuItem.Checked = (group.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_HIDE) == POWER_ATTR.POWER_ATTRIBUTE_HIDE;
-                    ShowToolStripMenuItem.Checked = (group.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC) == POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC;
-                    CopyGUIDToolStripMenuItem.Visible = GroupModel.ShowGuids;
-
-                    SaveSchemeToolStripMenuItem.Visible = false;
-                    ImportSchemeToolStripMenuItem.Visible = false;
-                    DuplicateSchemeToolStripMenuItem.Visible = false;
-                    DeleteSchemeToolStripMenuItem.Visible = false;
-                }
-                else if (node.Tag is SettingModel setting)
-                {
-                    HiddenToolStripMenuItem.Visible = true;
-                    ShowToolStripMenuItem.Visible = true;
-                    ActivateSchemeToolStripMenuItem.Visible = false;
-                    HiddenToolStripMenuItem.Checked = (setting.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_HIDE) == POWER_ATTR.POWER_ATTRIBUTE_HIDE;
-                    ShowToolStripMenuItem.Checked = (setting.PowerAttr & POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC) == POWER_ATTR.POWER_ATTRIBUTE_SHOW_AOAC;
-                    CopyGUIDToolStripMenuItem.Visible = SettingModel.ShowGuids;
-
-                    SaveSchemeToolStripMenuItem.Visible = false;
-                    ImportSchemeToolStripMenuItem.Visible = false;
-                    DuplicateSchemeToolStripMenuItem.Visible = false;
-                    DeleteSchemeToolStripMenuItem.Visible = false;
-                }
-                else
-                {
-                    e.Cancel = true;
-                }
+                BatteryReportButton.BackColor = SystemColors.ControlDark;
+                BatteryBackgroundWorker.RunWorkerAsync();
             }
             else
             {
-                CollapseToolStripMenuItem.Visible = false;
-                ExpandToolStripMenuItem.Visible = false;
-                HiddenToolStripMenuItem.Visible = false;
-                ShowToolStripMenuItem.Visible = false;
-                ActivateSchemeToolStripMenuItem.Visible = false;
-                CopyGUIDToolStripMenuItem.Visible = false;
-
-                SaveSchemeToolStripMenuItem.Visible = false;
-                ImportSchemeToolStripMenuItem.Visible = Schemes.CanCreate;
-                DuplicateSchemeToolStripMenuItem.Visible = false;
-                DeleteSchemeToolStripMenuItem.Visible = false;
+                if (MessageBox.Show(this, Properties.Resources.Battery_Report, "/BATTERYREPORT", buttons: MessageBoxButtons.YesNo, icon: MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    if (BatteryBackgroundWorker.IsBusy)
+                    {
+                        BatteryBackgroundWorker.CancelAsync();
+                    }
+                }
             }
-
-
 
         }
 
 
-        //public class PowerScheme
-        //{
-        //    public uint uiIndex { get; set; }
-        //    public uint dwName { get; set; }
-        //    public string sName { get; set; }
-        //    public uint dwDesc { get; set; }
-        //    public string sDesc { get; set; }
-        //    public POWER_POLICY pp { get; set; }
-        //}
-        //List<PowerScheme> PowerSchemes = new List<PowerScheme>();
+        Process? BatteryReportProcess = null;
+        private void BatteryBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            BatteryReportProcess = new Process();
+            BatteryReportProcess.StartInfo.FileName = ExpandVars("@%SystemRoot%\\system32\\powercfg.exe");
+            BatteryReportProcess.StartInfo.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            BatteryReportProcess.StartInfo.ArgumentList.Clear();
+            BatteryReportProcess.StartInfo.ArgumentList.Add("/BATTERYREPORT");
+            BatteryReportProcess.StartInfo.UseShellExecute = false;
+            BatteryReportProcess.StartInfo.CreateNoWindow = true;
+            BatteryReportProcess.StartInfo.RedirectStandardOutput = true;
+            BatteryReportProcess.StartInfo.RedirectStandardError = true;
+            BatteryReportProcess.StartInfo.StandardOutputEncoding = Encoding.Latin1;
+            BatteryReportProcess.StartInfo.StandardErrorEncoding = Encoding.Latin1;
+            BatteryReportProcess.EnableRaisingEvents = true;
+            BatteryReportProcess.Start();
+            do
+            {
+                if (BatteryBackgroundWorker.CancellationPending)
+                {
+                    BatteryReportProcess.Kill(true);
+                    e.Cancel = true;
+                }
 
-        //public bool p(uint uiIndex, uint dwName, string sName, uint dwDesc, string sDesc, in POWER_POLICY pp, IntPtr lParam)
-        //{
-        //    PowerSchemes.Add(new PowerScheme()
-        //    {
-        //        dwDesc = dwDesc,
-        //        dwName = dwName,
-        //        sName = sName,
-        //        pp = pp,
-        //        sDesc = sDesc,
-        //        uiIndex = uiIndex,
-        //    });
-        //    return true;
-        //}
+            } while (!BatteryReportProcess.HasExited);
+        }
+
+        private void BatteryBackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            BatteryReportButton.BackColor = SystemColors.Control;
+            if (BatteryReportProcess is Process process)
+            {
+                if (e.Cancelled)
+                {
+                    MessageBox.Show(this, Properties.Resources.Report_Cancelled, "/BATTERYREPORT", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Warning);
+                }
+                else if (process.ExitCode != 0)
+                {
+                    string errorOutput = process.StandardError.ReadToEnd();
+                    MessageBox.Show(this, errorOutput, "/BATTERYREPORT", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
+                }
+                else
+                {
+                    string consoleOutput = process.StandardOutput.ReadToEnd();
+                    try
+                    {
+                        string filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "battery-report.html");
+                        process = new Process();
+                        process.StartInfo.FileName = ExpandVars("@%ComSpec%");
+                        process.StartInfo.ArgumentList.Clear();
+                        process.StartInfo.ArgumentList.Add("/c");
+                        process.StartInfo.ArgumentList.Add("start");
+                        process.StartInfo.ArgumentList.Add($"{filename}");
+                        process.StartInfo.UseShellExecute = false;
+                        process.StartInfo.CreateNoWindow = true;
+                        process.StartInfo.RedirectStandardOutput = true;
+                        process.StartInfo.RedirectStandardError = true;
+                        process.StartInfo.StandardOutputEncoding = Encoding.Latin1;
+                        process.StartInfo.StandardErrorEncoding = Encoding.Latin1;
+                        process.Start();
+                    }
+                    catch
+                    {
+                        MessageBox.Show(this, consoleOutput, "/BATTERYREPORT", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Information);
+                    }
+                }
+            }
+        }
+
+        // ====================================
+        #endregion BATTERY REPORT
+        // ====================================
+
+        // ====================================
+        #region POWER REPORT
+        // ====================================
+
+        private void PowerReportButton_Click(object sender, EventArgs e)
+        {
+            if (!PowerReportBackgroundWorker.IsBusy)
+            {
+                PowerProgressBar.Value = 0;
+                PowerProgressBar.Visible = true;
+                PowerReportButton.BackColor = SystemColors.ControlDark;
+                PowerReportBackgroundWorker.RunWorkerAsync();
+            }
+            else
+            {
+                if (MessageBox.Show(this, Properties.Resources.Power_Report, "/SYSTEMPOWERREPORT", buttons: MessageBoxButtons.YesNo, icon: MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    if (PowerReportBackgroundWorker.IsBusy)
+                    {
+                        PowerReportBackgroundWorker.CancelAsync();
+                    }
+                }
+            }
+        }
+
+        Process? PowerReportProcess = null;
+        private void PowerReportBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            PowerReportProcess = new Process();
+
+            PowerReportProcess.StartInfo.FileName = ExpandVars("@%SystemRoot%\\system32\\powercfg.exe");
+            PowerReportProcess.StartInfo.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            PowerReportProcess.StartInfo.ArgumentList.Clear();
+            PowerReportProcess.StartInfo.ArgumentList.Add("/SYSTEMPOWERREPORT");
+            PowerReportProcess.StartInfo.UseShellExecute = false;
+            PowerReportProcess.StartInfo.CreateNoWindow = true;
+            PowerReportProcess.StartInfo.RedirectStandardOutput = true;
+            PowerReportProcess.StartInfo.RedirectStandardError = true;
+            PowerReportProcess.StartInfo.StandardOutputEncoding = Encoding.Latin1;
+            PowerReportProcess.StartInfo.StandardErrorEncoding = Encoding.Latin1;
+            PowerReportProcess.EnableRaisingEvents = true;
+
+            PowerReportProcess.Start();
+            DateTime lap = DateTime.Now;
+            int seconds = 0;
+            do
+            {
+                if (PowerReportBackgroundWorker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    PowerReportProcess.Kill(true);
+                }
+                if ((DateTime.Now - lap).TotalSeconds > 1)
+                {
+                    seconds++;
+                    lap = DateTime.Now;
+                    PowerReportBackgroundWorker.ReportProgress(seconds);
+                }
+            } while (!PowerReportProcess.HasExited);
+        }
+
+        private void PowerReportBackgroundWorker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            PowerProgressBar.Value = (e.ProgressPercentage % PowerProgressBar.Maximum);
+        }
+
+        private void PowerReportBackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            PowerReportButton.BackColor = SystemColors.Control;
+            PowerProgressBar.Visible = false;
+            if (PowerReportProcess is Process process)
+            {
+                if (e.Cancelled)
+                {
+
+                    MessageBox.Show(this, Properties.Resources.Report_Cancelled, "/SYSTEMPOWERREPORT", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Warning);
+                }
+                else if (process.ExitCode != 0)
+                {
+                    string errorOutput = process.StandardError.ReadToEnd();
+                    MessageBox.Show(this, errorOutput, "/SYSTEMPOWERREPORT", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
+                }
+                else
+                {
+                    string consoleOutput = process.StandardOutput.ReadToEnd();
+                    try
+                    {
+                        string filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "sleepstudy-report.html");
+                        process = new Process();
+                        process.StartInfo.FileName = ExpandVars("@%ComSpec%");
+                        process.StartInfo.ArgumentList.Clear();
+                        process.StartInfo.ArgumentList.Add("/c");
+                        process.StartInfo.ArgumentList.Add("start");
+                        process.StartInfo.ArgumentList.Add($"{filename}");
+                        process.StartInfo.UseShellExecute = false;
+                        process.StartInfo.CreateNoWindow = true;
+                        process.StartInfo.RedirectStandardOutput = true;
+                        process.StartInfo.RedirectStandardError = true;
+                        process.StartInfo.StandardOutputEncoding = Encoding.Latin1;
+                        process.StartInfo.StandardErrorEncoding = Encoding.Latin1;
+                        process.Start();
+                    }
+                    catch
+                    {
+                        MessageBox.Show(this, consoleOutput, "/SYSTEMPOWERREPORT", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Information);
+                    }
+                }
+            }
+        }
+
+        // ====================================
+        #endregion POWER REPORT
+        // ====================================
+
+        // ====================================
+        #region ENERGY REPORT
+        // ====================================
+        private void EnergyReportButton_Click(object sender, EventArgs e)
+        {
+            if (!EnergyReportBackgroundWorker.IsBusy)
+            {
+                EnergyProgressBar.Value = 0;
+                EnergyProgressBar.Visible = true;
+                EnergyReportButton.BackColor = SystemColors.ControlDark;
+                EnergyReportBackgroundWorker.RunWorkerAsync();
+            }
+            else
+            {
+                if (MessageBox.Show(this, Properties.Resources.Energy_Report, "/ENERGY", buttons: MessageBoxButtons.YesNo, icon: MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    if (EnergyReportBackgroundWorker.IsBusy)
+                    {
+                        EnergyReportBackgroundWorker.CancelAsync();
+                    }
+                }
+            }
+        }
+        Process? EnergyProcess = null;
+        private void EnergyBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+
+
+            EnergyProcess = new Process();
+            EnergyProcess.StartInfo.FileName = ExpandVars("@%SystemRoot%\\system32\\powercfg.exe");
+            EnergyProcess.StartInfo.WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            EnergyProcess.StartInfo.ArgumentList.Clear();
+            EnergyProcess.StartInfo.ArgumentList.Add("/ENERGY");
+            EnergyProcess.StartInfo.UseShellExecute = false;
+            EnergyProcess.StartInfo.CreateNoWindow = true;
+            EnergyProcess.StartInfo.RedirectStandardOutput = true;
+            EnergyProcess.StartInfo.RedirectStandardError = true;
+            EnergyProcess.StartInfo.StandardOutputEncoding = Encoding.Latin1;
+            EnergyProcess.StartInfo.StandardErrorEncoding = Encoding.Latin1;
+            EnergyProcess.EnableRaisingEvents = true;
+            EnergyProcess.Start();
+            DateTime lap = DateTime.Now;
+            int seconds = 0;
+            do
+            {
+                if (EnergyReportBackgroundWorker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    EnergyProcess.Kill(true);
+                }
+                if ((DateTime.Now - lap).TotalSeconds > 1)
+                {
+                    seconds++;
+                    lap = DateTime.Now;
+                    EnergyReportBackgroundWorker.ReportProgress(seconds);
+                }
+            } while (!EnergyProcess.HasExited);
+        }
+
+        private void EnergyBackgroundWorker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            EnergyProgressBar.Value = (e.ProgressPercentage % EnergyProgressBar.Maximum);
+        }
+
+        private void EnergyBackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            EnergyReportButton.BackColor = SystemColors.Control;
+            EnergyProgressBar.Visible = false;
+            if (EnergyProcess is Process process)
+            {
+                if (e.Cancelled)
+                {
+
+                    MessageBox.Show(this, Properties.Resources.Report_Cancelled, "/ENERGY", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Warning);
+                }
+                else if (EnergyProcess.ExitCode != 0)
+                {
+                    string errorOutput = EnergyProcess.StandardError.ReadToEnd();
+                    MessageBox.Show(this, errorOutput, "/ENERGY", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
+                }
+                else
+                {
+                    string consoleOutput = EnergyProcess.StandardOutput.ReadToEnd();
+                    try
+                    {
+                        string filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "energy-report.html");
+                        process = new Process();
+                        process.StartInfo.FileName = ExpandVars("@%ComSpec%");
+                        process.StartInfo.ArgumentList.Clear();
+                        process.StartInfo.ArgumentList.Add("/c");
+                        process.StartInfo.ArgumentList.Add("start");
+                        process.StartInfo.ArgumentList.Add($"{filename}");
+                        process.StartInfo.UseShellExecute = false;
+                        process.StartInfo.CreateNoWindow = true;
+                        process.StartInfo.RedirectStandardOutput = true;
+                        process.StartInfo.RedirectStandardError = true;
+                        process.StartInfo.StandardOutputEncoding = Encoding.Latin1;
+                        process.StartInfo.StandardErrorEncoding = Encoding.Latin1;
+                        process.Start();
+                    }
+                    catch
+                    {
+                        MessageBox.Show(this, consoleOutput, "/ENERGY", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Information);
+                    }
+                }
+            }
+        }
+        // ====================================
+        #endregion ENERGY REPORT
+        // ====================================
+
 
     }
 }
