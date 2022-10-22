@@ -1,6 +1,6 @@
 # PowerCFG
 * A Graphical IDE for PowerCFG.
- * You can see/change all hidden values. Guid's optionally to paste in command line windows command PowerCFG.exe
+ * You can see/change all hidden values. You can see Guid's optionally to paste them in PowerCFG.exe command line
  * Restore to default values individually.
 ![ScreenShot](ScreenShot.png)
  * Save (As Administrator), Restore, Duplicate & Delete Schemes
